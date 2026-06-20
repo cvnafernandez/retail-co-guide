@@ -1,779 +1,965 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CO VITU Registration Guide</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CO VITU Registration Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#f0f2f5;color:#1e293b;overflow:hidden;height:100vh;}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f1f5f9;
-      color: #1e293b;
-      overflow: hidden;
-      height: 100vh;
-    }
+/* ── APP HEADER ─────────────────────────────────── */
+.app-header{
+  height:56px;background:#0f172a;color:#fff;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;position:sticky;top:0;z-index:200;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);
+}
+.app-header-brand{display:flex;align-items:center;gap:10px;}
+.app-header-logo{
+  width:34px;height:34px;background:#2563eb;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:800;color:#fff;letter-spacing:-.5px;
+}
+.app-header-title{font-size:15px;font-weight:700;}
+.app-header-sub{font-size:11px;color:#64748b;margin-top:1px;}
+.app-header-right{display:flex;align-items:center;gap:14px;}
+.progress-wrap{display:flex;align-items:center;gap:8px;}
+.prog-bar{width:160px;height:5px;background:#1e293b;border-radius:999px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,#3b82f6,#22c55e);border-radius:999px;transition:width .4s;}
+.prog-text{font-size:11px;color:#64748b;white-space:nowrap;}
+.state-badge{
+  background:#1e3a5f;color:#60a5fa;font-size:10px;font-weight:700;
+  padding:4px 10px;border-radius:999px;border:1px solid #2563eb55;letter-spacing:.04em;
+}
 
-    /* ── HEADER ─────────────────────────────────────────────── */
-    .header {
-      background: #0f172a;
-      color: white;
-      padding: 0 24px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
-    }
-    .header-brand { display: flex; align-items: center; gap: 12px; }
-    .header-logo {
-      background: #2563eb;
-      color: white;
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 800;
-    }
-    .header-title { font-size: 16px; font-weight: 700; }
-    .header-sub { font-size: 11px; color: #64748b; margin-top: 1px; }
-    .header-right { display: flex; align-items: center; gap: 16px; }
-    .progress-wrap { display: flex; align-items: center; gap: 10px; }
-    .progress-bar {
-      width: 180px;
-      height: 6px;
-      background: #1e293b;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #2563eb, #22c55e);
-      border-radius: 999px;
-      transition: width 0.4s ease;
-      width: 0%;
-    }
-    .progress-text { font-size: 12px; color: #64748b; white-space: nowrap; }
-    .header-badge {
-      background: #1e3a5f;
-      color: #60a5fa;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid #2563eb44;
-    }
+/* ── THREE-COLUMN LAYOUT ─────────────────────────── */
+.app-body{display:flex;height:calc(100vh - 56px);}
 
-    /* ── LAYOUT ─────────────────────────────────────────────── */
-    .layout {
-      display: flex;
-      height: calc(100vh - 60px);
-    }
+/* ── LEFT NAV ───────────────────────────────────── */
+.nav-col{
+  width:210px;min-width:210px;background:#fff;
+  border-right:1px solid #e2e8f0;overflow-y:auto;
+  padding:10px 0 20px;
+}
+.nav-group-label{
+  font-size:9.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:#94a3b8;padding:10px 14px 5px;
+}
+.nav-item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 14px;cursor:pointer;border-left:3px solid transparent;
+  transition:all .12s;
+}
+.nav-item:hover{background:#f8fafc;}
+.nav-item.active{background:#eff6ff;border-left-color:#2563eb;}
+.nav-item.active .nav-txt{color:#2563eb;font-weight:600;}
+.nav-ico{font-size:14px;flex-shrink:0;width:18px;text-align:center;}
+.nav-txt{font-size:12px;color:#475569;flex:1;line-height:1.3;}
+.nav-right-wrap{display:flex;align-items:center;gap:4px;}
+.risk-chip{
+  font-size:8.5px;font-weight:700;padding:2px 5px;
+  border-radius:3px;text-transform:uppercase;
+}
+.rh{background:#fee2e2;color:#dc2626;}
+.rm{background:#fef3c7;color:#b45309;}
+.rl{background:#dcfce7;color:#15803d;}
+.nav-chk{font-size:12px;}
+.nav-chk.done{color:#22c55e;}
+.nav-chk.pend{color:#cbd5e1;}
 
-    /* ── SIDEBAR ─────────────────────────────────────────────── */
-    .sidebar {
-      width: 260px;
-      min-width: 260px;
-      background: white;
-      border-right: 1px solid #e2e8f0;
-      overflow-y: auto;
-      padding: 12px 0 24px;
-    }
-    .sidebar-label {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #94a3b8;
-      padding: 10px 18px 6px;
-    }
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 18px;
-      cursor: pointer;
-      border-left: 3px solid transparent;
-      transition: all 0.15s;
-      position: relative;
-    }
-    .nav-item:hover { background: #f8fafc; }
-    .nav-item.active {
-      background: #eff6ff;
-      border-left-color: #2563eb;
-    }
-    .nav-item.active .nav-text { color: #2563eb; font-weight: 600; }
-    .nav-icon { font-size: 15px; width: 22px; text-align: center; flex-shrink: 0; }
-    .nav-text { font-size: 13px; color: #475569; flex: 1; line-height: 1.3; }
-    .nav-right { display: flex; align-items: center; gap: 5px; }
-    .risk-chip {
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 5px;
-      border-radius: 4px;
-      text-transform: uppercase;
-    }
-    .risk-high { background: #fee2e2; color: #dc2626; }
-    .risk-med  { background: #fef3c7; color: #b45309; }
-    .risk-low  { background: #dcfce7; color: #15803d; }
-    .nav-check { font-size: 13px; }
-    .nav-check.done { color: #22c55e; }
-    .nav-check.pending { color: #cbd5e1; }
+/* ── CENTER PORTAL ───────────────────────────────── */
+.portal-col{
+  flex:1;overflow-y:auto;background:#f0f2f5;
+  padding:20px 18px 40px;
+}
 
-    /* ── MAIN CONTENT ─────────────────────────────────────────── */
-    .main {
-      flex: 1;
-      overflow-y: auto;
-      padding: 28px 36px 48px;
-    }
+/* VITU-style section wrapper */
+.vitu-section{background:#fff;border:1px solid #d1d5db;border-radius:0;}
+.vitu-sec-header{
+  background:#fff;border-bottom:2px solid #0070c0;
+  padding:10px 14px;display:flex;align-items:center;justify-content:space-between;
+}
+.vitu-sec-title{font-size:13px;font-weight:700;text-transform:uppercase;color:#1e293b;letter-spacing:.04em;}
+.vitu-populate-btn{
+  background:#28a745;color:#fff;border:none;padding:5px 12px;
+  border-radius:3px;font-size:11px;font-weight:600;cursor:pointer;
+  transition:background .15s;
+}
+.vitu-populate-btn:hover{background:#218838;}
 
-    /* Section header */
-    .sec-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 6px;
-    }
-    .sec-subtitle { font-size: 14px; color: #64748b; margin-bottom: 20px; }
+/* VITU summary bar (Vehicle Info style) */
+.vitu-summary-bar{
+  background:#cce5ff;border-bottom:1px solid #b8daff;
+  display:flex;padding:8px 14px;gap:0;
+}
+.vitu-summary-item{flex:1;padding:0 10px;}
+.vitu-summary-item:first-child{padding-left:0;}
+.vitu-summary-label{font-size:10px;color:#004085;font-weight:600;text-transform:none;}
+.vitu-summary-value{font-size:12px;color:#004085;font-weight:400;margin-top:1px;}
 
-    /* Legend */
-    .legend {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 10px 16px;
-      margin-bottom: 18px;
-    }
-    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #64748b; }
-    .l-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
-    .l-auto   { background: #22c55e; }
-    .l-verify { background: #f59e0b; }
-    .l-manual { background: #ef4444; }
-    .l-blank  { background: #94a3b8; }
+/* Form body */
+.vitu-body{padding:14px;}
+.vitu-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
+.vitu-row:last-child{margin-bottom:0;}
 
-    /* Hold banner */
-    .hold-banner {
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      border: 1px solid;
-    }
-    .hold-banner.high  { background: #fef2f2; border-color: #fecaca; }
-    .hold-banner.med   { background: #fffbeb; border-color: #fde68a; }
-    .hold-banner.low   { background: #f0fdf4; border-color: #bbf7d0; }
-    .hold-icon { font-size: 22px; line-height: 1; }
-    .hold-body {}
-    .hold-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
-    .hold-banner.high .hold-title { color: #dc2626; }
-    .hold-banner.med  .hold-title { color: #b45309; }
-    .hold-banner.low  .hold-title { color: #15803d; }
-    .hold-text { font-size: 13px; color: #475569; line-height: 1.5; }
+/* Field wrapper */
+.vf{display:flex;flex-direction:column;min-width:0;}
+.vf.w1{flex:1 1 120px;}
+.vf.w2{flex:2 1 200px;}
+.vf.w3{flex:3 1 260px;}
+.vf.w4{flex:4 1 100%;}
+.vf.wfull{flex:1 1 100%;}
+.vf.wradio{flex:0 0 auto;}
 
-    /* Fields grid */
-    .fields-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 12px;
-      margin-bottom: 28px;
-    }
+/* Label */
+.vf-label{
+  font-size:11px;color:#1565c0;font-weight:500;
+  margin-bottom:3px;display:flex;align-items:center;gap:3px;
+  cursor:pointer;
+}
+.vf-label .req{color:#e53935;font-weight:700;font-size:11px;}
 
-    /* Field card */
-    .fc {
-      background: white;
-      border-radius: 10px;
-      padding: 14px 16px;
-      border: 1px solid #e2e8f0;
-      border-left: 4px solid;
-      transition: box-shadow 0.15s, transform 0.1s;
-    }
-    .fc:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); transform: translateY(-1px); }
-    .fc.auto   { border-left-color: #22c55e; }
-    .fc.verify { border-left-color: #f59e0b; }
-    .fc.manual { border-left-color: #ef4444; }
-    .fc.blank  { border-left-color: #94a3b8; }
-    .fc.wide   { grid-column: 1 / -1; }
+/* Inputs styled like VITU */
+.vf input[type=text],
+.vf select,
+.vf input[type=date]{
+  width:100%;padding:5px 7px;
+  border:1px solid #9e9e9e;border-radius:2px;
+  font-size:12px;color:#1e293b;background:#fff;
+  font-family:inherit;outline:none;
+  transition:border-color .15s, box-shadow .15s;
+  cursor:pointer;
+}
+.vf input[type=text]:focus,
+.vf select:focus,
+.vf input[type=date]:focus{
+  border-color:#0070c0;
+  box-shadow:0 0 0 2px rgba(0,112,192,.15);
+}
+.vf input[type=text].status-auto,
+.vf select.status-auto{background:#f0fdf4;border-color:#86efac;}
+.vf input[type=text].status-blank,
+.vf select.status-blank{background:#f8f9fa;color:#9ca3af;font-style:italic;}
+.vf input[type=text].status-manual,
+.vf select.status-manual{background:#fff7ed;border-color:#fcd34d;}
+.vf input[type=text].status-verify,
+.vf select.status-verify{background:#eff6ff;border-color:#93c5fd;}
 
-    .fc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
-    .fc-name { font-size: 14px; font-weight: 600; color: #0f172a; line-height: 1.3; }
-    .fc-badge {
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 3px 8px;
-      border-radius: 999px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .badge-auto   { background: #dcfce7; color: #15803d; }
-    .badge-verify { background: #fef3c7; color: #92400e; }
-    .badge-manual { background: #fee2e2; color: #b91c1c; }
-    .badge-blank  { background: #f1f5f9; color: #64748b; }
+/* Field active highlight */
+.vf.active .vf-label{color:#0070c0;font-weight:700;}
+.vf.active input[type=text],
+.vf.active select,
+.vf.active input[type=date]{
+  border-color:#0070c0;
+  box-shadow:0 0 0 3px rgba(0,112,192,.2);
+}
 
-    .fc-tip { font-size: 13px; color: #475569; line-height: 1.55; margin-bottom: 10px; }
-    .fc-source {
-      font-size: 11px;
-      color: #94a3b8;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-weight: 500;
-    }
+/* Radio groups */
+.radio-group{display:flex;gap:14px;align-items:center;margin-top:4px;}
+.radio-group label{
+  display:flex;align-items:center;gap:5px;
+  font-size:12px;color:#1e293b;cursor:pointer;font-weight:400;
+}
+.radio-group input[type=radio]{
+  width:14px;height:14px;cursor:pointer;accent-color:#0070c0;
+}
 
-    /* Subnote box */
-    .subnote {
-      grid-column: 1 / -1;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 14px 18px;
-      font-size: 13px;
-      color: #475569;
-    }
-    .subnote strong { color: #1e293b; }
-    .subnote ul { padding-left: 20px; margin-top: 6px; }
-    .subnote li { margin-bottom: 4px; }
+/* Checkbox row */
+.checkbox-row{display:flex;align-items:center;gap:6px;margin-top:4px;}
+.checkbox-row input[type=checkbox]{
+  width:14px;height:14px;cursor:pointer;accent-color:#0070c0;
+}
+.checkbox-row label{font-size:12px;color:#1e293b;cursor:pointer;}
 
-    /* Final steps */
-    .final-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-left: 4px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .final-step:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.07); }
-    .final-step.done { background: #f0fdf4; border-left-color: #22c55e; }
-    .final-step input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      accent-color: #22c55e;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .fs-label { font-size: 14px; font-weight: 600; color: #1e293b; }
-    .final-step.done .fs-label { text-decoration: line-through; color: #15803d; }
-    .fs-note { font-size: 12px; color: #64748b; margin-top: 3px; line-height: 1.4; }
+/* Section divider label */
+.vitu-divider{
+  background:#f8f9fa;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;
+  padding:6px 14px;font-size:11px;color:#64748b;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;
+}
 
-    /* Complete button */
-    .complete-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.15s;
-      margin-top: 4px;
-    }
-    .complete-btn.incomplete { background: #2563eb; color: white; }
-    .complete-btn.incomplete:hover { background: #1d4ed8; }
-    .complete-btn.complete { background: #22c55e; color: white; cursor: default; }
+/* Final steps */
+.final-checklist{padding:14px;}
+.final-step-row{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 14px;border:1px solid #e2e8f0;border-radius:6px;
+  margin-bottom:8px;cursor:pointer;background:#fff;
+  transition:all .15s;
+}
+.final-step-row:hover{background:#f8fafc;border-color:#cbd5e1;}
+.final-step-row.done{background:#f0fdf4;border-color:#86efac;}
+.final-step-row input[type=checkbox]{
+  width:18px;height:18px;flex-shrink:0;margin-top:1px;
+  cursor:pointer;accent-color:#22c55e;
+}
+.fs-label{font-size:13px;font-weight:600;color:#1e293b;}
+.final-step-row.done .fs-label{text-decoration:line-through;color:#15803d;}
+.fs-note{font-size:11px;color:#64748b;margin-top:2px;line-height:1.4;}
 
-    /* Next button */
-    .next-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      border: 1px solid #e2e8f0;
-      background: white;
-      color: #1e293b;
-      transition: all 0.15s;
-      margin-top: 4px;
-      margin-left: 10px;
-    }
-    .next-btn:hover { background: #f8fafc; }
+/* Hold risk banner above the portal */
+.hold-bar{
+  border-radius:6px;padding:10px 14px;margin-bottom:12px;
+  display:flex;align-items:flex-start;gap:10px;border:1px solid;
+}
+.hold-bar.high{background:#fef2f2;border-color:#fca5a5;}
+.hold-bar.med{background:#fffbeb;border-color:#fde68a;}
+.hold-bar.low{background:#f0fdf4;border-color:#86efac;}
+.hold-bar-ico{font-size:18px;line-height:1;flex-shrink:0;}
+.hold-bar-body{}
+.hold-bar-title{font-size:12px;font-weight:700;margin-bottom:2px;}
+.hold-bar.high .hold-bar-title{color:#dc2626;}
+.hold-bar.med .hold-bar-title{color:#b45309;}
+.hold-bar.low .hold-bar-title{color:#15803d;}
+.hold-bar-text{font-size:12px;color:#475569;line-height:1.5;}
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-  </style>
+/* Mark complete button */
+.mark-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 20px;border-radius:6px;border:none;
+  font-size:13px;font-weight:600;cursor:pointer;
+  margin-top:14px;transition:all .15s;
+}
+.mark-btn.todo{background:#2563eb;color:#fff;}
+.mark-btn.todo:hover{background:#1d4ed8;}
+.mark-btn.done{background:#22c55e;color:#fff;cursor:default;}
+.next-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 20px;border-radius:6px;border:1px solid #e2e8f0;
+  background:#fff;color:#1e293b;font-size:13px;font-weight:600;
+  cursor:pointer;margin-top:14px;margin-left:8px;transition:all .15s;
+  font-family:inherit;
+}
+.next-btn:hover{background:#f8fafc;}
+
+/* ── RIGHT GUIDE PANEL ──────────────────────────── */
+.guide-col{
+  width:300px;min-width:300px;background:#fff;
+  border-left:1px solid #e2e8f0;overflow-y:auto;
+  display:flex;flex-direction:column;
+}
+.guide-header{
+  background:#0f172a;color:#fff;
+  padding:12px 16px;font-size:13px;font-weight:700;
+  flex-shrink:0;border-bottom:1px solid #1e293b;
+  display:flex;align-items:center;gap:8px;
+}
+.guide-header .guide-icon{font-size:16px;}
+.guide-body{flex:1;padding:0;overflow-y:auto;}
+
+/* Idle state: full checklist */
+.guide-checklist{padding:14px;}
+.guide-sec-badge{
+  font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:#94a3b8;margin-bottom:10px;
+  padding-bottom:8px;border-bottom:1px solid #e2e8f0;
+}
+.guide-field-row{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:8px 10px;border-radius:6px;cursor:pointer;
+  margin-bottom:3px;transition:background .12s;
+  border:1px solid transparent;
+}
+.guide-field-row:hover{background:#f8fafc;border-color:#e2e8f0;}
+.guide-field-row.active{background:#eff6ff;border-color:#bfdbfe;}
+.guide-field-dot{
+  width:9px;height:9px;border-radius:2px;flex-shrink:0;margin-top:3px;
+}
+.dot-auto{background:#22c55e;}
+.dot-verify{background:#f59e0b;}
+.dot-manual{background:#ef4444;}
+.dot-blank{background:#94a3b8;}
+.guide-field-name{font-size:12px;color:#374151;flex:1;line-height:1.3;}
+.guide-field-badge{
+  font-size:8.5px;font-weight:700;padding:2px 5px;
+  border-radius:3px;text-transform:uppercase;flex-shrink:0;
+}
+.gb-auto{background:#dcfce7;color:#15803d;}
+.gb-verify{background:#fef3c7;color:#92400e;}
+.gb-manual{background:#fee2e2;color:#b91c1c;}
+.gb-blank{background:#f1f5f9;color:#64748b;}
+
+/* Active field detail */
+.guide-detail{padding:0;}
+.gd-back{
+  padding:10px 14px;font-size:11px;color:#2563eb;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;gap:5px;
+  border-bottom:1px solid #e2e8f0;background:#f8fafc;
+}
+.gd-back:hover{background:#eff6ff;}
+.gd-status-bar{
+  padding:12px 14px;border-bottom:1px solid #e2e8f0;
+}
+.gd-status-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.gd-sc-auto{background:#dcfce7;color:#15803d;}
+.gd-sc-verify{background:#fef3c7;color:#92400e;}
+.gd-sc-manual{background:#fee2e2;color:#b91c1c;}
+.gd-sc-blank{background:#f1f5f9;color:#64748b;}
+.gd-fieldname{font-size:16px;font-weight:700;color:#0f172a;margin-top:8px;}
+.gd-content{padding:14px;}
+.gd-section-label{
+  font-size:9.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:#94a3b8;margin-bottom:6px;margin-top:14px;
+}
+.gd-section-label:first-child{margin-top:0;}
+.gd-tip{
+  font-size:13px;color:#374151;line-height:1.6;
+  background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;
+  padding:10px 12px;
+}
+.gd-source{
+  font-size:12px;color:#475569;display:flex;align-items:flex-start;
+  gap:6px;padding:8px 12px;background:#f0f9ff;border-radius:6px;
+  border:1px solid #bae6fd;
+}
+.gd-warning{
+  font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;
+  border-radius:6px;padding:8px 12px;display:flex;gap:6px;
+}
+.gd-legend{
+  display:flex;flex-direction:column;gap:5px;
+  padding:10px;border:1px solid #e2e8f0;border-radius:6px;background:#f8fafc;
+  margin-top:2px;
+}
+.gd-legend-item{display:flex;align-items:center;gap:7px;font-size:11px;color:#475569;}
+
+/* Scrollbars */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px;}
+::-webkit-scrollbar-thumb:hover{background:#94a3b8;}
+</style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-brand">
-    <div class="header-logo">CO</div>
+<!-- APP HEADER -->
+<div class="app-header">
+  <div class="app-header-brand">
+    <div class="app-header-logo">CO</div>
     <div>
-      <div class="header-title">VITU Registration Guide</div>
-      <div class="header-sub">Colorado In-State Title &amp; Registration — Specialist Reference</div>
+      <div class="app-header-title">VITU Registration Guide</div>
+      <div class="app-header-sub">Colorado In-State Title &amp; Registration — Specialist Reference</div>
     </div>
   </div>
-  <div class="header-right">
-    <div class="header-badge">Colorado In-State</div>
+  <div class="app-header-right">
+    <div class="state-badge">Colorado In-State</div>
     <div class="progress-wrap">
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <div class="progress-text" id="progressText">0 / 14 sections</div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-text" id="progText">0 / 14 sections</div>
     </div>
   </div>
 </div>
 
-<!-- LAYOUT -->
-<div class="layout">
-  <div class="sidebar" id="sidebar"></div>
-  <div class="main" id="main"></div>
+<!-- THREE COLUMNS -->
+<div class="app-body">
+  <aside class="nav-col" id="navCol"></aside>
+  <main class="portal-col" id="portalCol"></main>
+  <aside class="guide-col">
+    <div class="guide-header"><span class="guide-icon">📋</span> Field Guide</div>
+    <div class="guide-body" id="guideBody"></div>
+  </aside>
 </div>
 
 <script>
-  // ─── DATA ──────────────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// FIELD DEFINITIONS
+// status: 'auto' | 'verify' | 'manual' | 'blank'
+// type:   'text' | 'select' | 'radio' | 'checkbox' | 'date'
+// ══════════════════════════════════════════════════════════════════
+const F = {
+  // TRANSACTION
+  location:        { label:'Location', req:true, type:'select', status:'verify', placeholder:'— Verify auto-selected location —', tip:'Defaults automatically to a location. Confirm it is the correct dealership location before proceeding.', source:'Auto-populated — verify', warning:null },
+  titlingState:    { label:'Titling State', req:true, type:'select', status:'manual', placeholder:'Colorado (CO)', tip:'Must be set to Colorado (CO). If it defaults to another state, correct it immediately before moving forward.', source:'Manually set', warning:'Incorrect state is one of the most common hold causes' },
+  acquisitionType: { label:'Acquisition Type', req:true, type:'select', status:'manual', placeholder:'Colorado Dealer', tip:'Always select "Colorado Dealer." No other option should be used for CO in-state deals.', source:'Manually set', warning:null },
+  transaction:     { label:'Transaction', req:true, type:'select', status:'manual', placeholder:'Title Only', tip:'Always select "Title Only." This does not change for CO in-state submissions.', source:'Manually set', warning:null },
+  transactionType: { label:'Transaction Type', req:true, type:'select', status:'manual', placeholder:'New Ownership', tip:'Always select "New Ownership."', source:'Manually set', warning:null },
+  isDelivered:     { label:'Is Vehicle Delivered?', req:true, type:'radio', status:'manual', tip:'Check CARMA and mark Yes or No accurately. Must reflect actual delivery status for the deal.', source:'CARMA', warning:null },
+  // VEHICLE
+  vin:             { label:'VIN', req:true, type:'text', status:'manual', placeholder:'Enter VIN then click Populate from VIN Decode', tip:'Enter the VIN first, then click "Populate from VIN Decode" to auto-fill the remaining vehicle fields. Do not manually enter decoded fields if VIN decode is available.', source:'Title / Paperwork', warning:null },
+  stockNo:         { label:'Stock #', req:false, type:'text', status:'manual', placeholder:'Stock number (e.g. 2004944254)', tip:'Must match the deal\'s stock number exactly as it appears in the system.', source:'Deal paperwork', warning:null },
+  soldAs:          { label:'Vehicle Sold As', req:true, type:'select', status:'manual', placeholder:'USED', tip:'Always select "Used." This should never change for standard Carvana in-state deals.', source:'Manually set', warning:null },
+  specialPurchase: { label:'Special Purchase Type', req:false, type:'select', status:'blank', placeholder:'— Leave BLANK —', tip:'Leave this field completely BLANK. Do not select any value under any circumstances.', source:'N/A — always blank', warning:null },
+  vehicleType:     { label:'Vehicle Type', req:true, type:'select', status:'verify', placeholder:'Auto-populates from VIN decode', tip:'Auto-populates from VIN decode. Verify it is correct before continuing. Should typically be PASSENGER CAR or equivalent.', source:'VIN decode', warning:null },
+  vehicleClass:    { label:'Vehicle Class', req:true, type:'select', status:'verify', placeholder:'Auto-populates from VIN decode', tip:'Auto-populates from VIN decode. Verify it is correct.', source:'VIN decode', warning:null },
+  year:            { label:'Year', req:true, type:'text', status:'verify', placeholder:'Auto-populates', tip:'Auto-populates from VIN decode. Confirm it matches the physical title.', source:'VIN decode', warning:null },
+  make:            { label:'Make', req:true, type:'text', status:'verify', placeholder:'Full make name (e.g. MAZDA)', tip:'Auto-populates as the full make name (e.g., MAZDA not Mazda). Verify it matches the title.', source:'VIN decode', warning:null },
+  model:           { label:'Model', req:true, type:'text', status:'verify', placeholder:'Short form (e.g. CX-5)', tip:'Auto-populates in shortened form. Verify against the title.', source:'VIN decode', warning:null },
+  style:           { label:'Style', req:true, type:'select', status:'verify', placeholder:'Verify — often incorrect', tip:'Auto-populates but is frequently wrong. Verify carefully:\n• CP = Coupe\n• CV = Convertible\n• SD = Sedan\n• UP = SUV / Utility Passenger\n• PV = Passenger Van\n• SW = Station Wagon\n• PK = Pickup Truck', source:'VIN decode — verify carefully', warning:'Frequent hold cause — always confirm the correct body style code' },
+  color:           { label:'Color', req:true, type:'select', status:'manual', placeholder:'Match color across all paperwork', tip:'Must match the color exactly as shown across all deal paperwork (title, bill of sale). Inconsistency causes holds.', source:'Title / Bill of Sale', warning:'Color must be consistent across all documents' },
+  unladenWeight:   { label:'Unladen Weight', req:true, type:'text', status:'manual', placeholder:'Pull from MT or AR title', tip:'Pull from the MT or AR title. If the vehicle title is Arizona (AZ), leave the auto-populated value as-is — do not change it.', source:'MT or AR title (not AZ)', warning:'AZ title: leave as-is. MT / AR title: enter value from the title' },
+  fuelType:        { label:'Fuel Type', req:false, type:'select', status:'verify', placeholder:'Auto-populates from VIN decode', tip:'Should be correct from VIN decode. If wrong, check vehicle details in CARMA and correct it.', source:'VIN decode / CARMA', warning:null },
+  overrideFuel:    { label:'Override Fuel Type', req:false, type:'checkbox', status:'blank', tip:'Only check this box if the fuel type decoded incorrectly and you need to correct it. Otherwise leave unchecked.', source:'Only if needed', warning:null },
+  plugin:          { label:'Plug In', req:false, type:'radio', status:'verify', tip:'Always "No" unless the vehicle is fully electric or a specific plug-in hybrid model. Standard hybrids (non plug-in) should be No.', source:'Vehicle specs', warning:null },
+  overridePlugin:  { label:'Override Plug In', req:false, type:'radio', status:'blank', tip:'Always "No" unless an error appears specifically when "Get Fees" is clicked. Only override at that point if prompted.', source:'Only if an error appears', warning:null },
+  fleetNo:         { label:'Fleet/Non Fleet Unit Number', req:false, type:'text', status:'blank', placeholder:'— Leave Blank —', tip:'Always leave BLANK. Do not enter anything in this field.', source:'N/A — always blank', warning:null },
+  odomValidity:    { label:'Odometer Validity', req:true, type:'select', status:'verify', placeholder:'ACTUAL MILEAGE', tip:'Defaults to "Actual Mileage" — this is always correct. Do not change it.', source:'Auto-populated', warning:null },
+  odomReading:     { label:'Odometer Reading', req:true, type:'text', status:'manual', placeholder:'Must match bill of sale exactly', tip:'Must match the bill of sale exactly to the mile. A discrepancy here is a very common hold cause.', source:'Bill of Sale', warning:'Common hold trigger — must match bill of sale to the mile' },
+  odomUnit:        { label:'Odometer Unit', req:true, type:'select', status:'verify', placeholder:'MILES', tip:'Defaults to "Actual Miles" — this is always correct. Do not change it.', source:'Auto-populated', warning:null },
+  // OWNER
+  ownerType:       { label:'Primary Owner', req:true, type:'select', status:'manual', placeholder:'Individual', tip:'Always select "Individual." This never changes for standard Carvana deals.', source:'Manually set', warning:null },
+  lastName:        { label:'Last Name', req:true, type:'text', status:'manual', placeholder:'Exactly as on driver\'s license', tip:'Enter exactly as it appears on the driver\'s license — including hyphens, apostrophes, and spacing. Any deviation causes holds.', source:'Driver\'s License', warning:'Must match DL character-for-character' },
+  firstName:       { label:'First Name', req:true, type:'text', status:'manual', placeholder:'Exactly as on driver\'s license', tip:'Enter exactly as it appears on the driver\'s license.', source:'Driver\'s License', warning:null },
+  middleName:      { label:'Middle Name', req:false, type:'text', status:'manual', placeholder:'As on DL (include if present)', tip:'Include if present on the DL. Enter exactly as it appears — do not abbreviate. Leave blank only if not on the DL.', source:'Driver\'s License', warning:null },
+  suffix:          { label:'Suffix', req:false, type:'text', status:'manual', placeholder:'Only if shown on DL (Jr., Sr., III)', tip:'Only enter if the suffix appears on the driver\'s license (Jr., Sr., III, etc.). Leave blank if not present on the DL.', source:'Driver\'s License', warning:null },
+  // PROOF OF ID
+  proofType:       { label:'Proof of Identification', req:true, type:'select', status:'manual', placeholder:'Select document type', tip:'Select the document type that applies to this customer — CO DL, OOS DL, US Passport, etc.', source:'Customer\'s ID document', warning:null },
+  docNumber:       { label:'Document Number', req:true, type:'text', status:'manual', placeholder:'ID or document number', tip:'The ID number or document number from the selected identification document.', source:'Customer\'s ID document', warning:null },
+  docFirstName:    { label:'Document First Name', req:false, type:'text', status:'manual', placeholder:'OOS DL only', tip:'Only required when an OOS (out-of-state) driver\'s license is used. Leave blank for CO DL.', source:'OOS DL only', warning:null },
+  docLastName:     { label:'Document Last Name', req:false, type:'text', status:'manual', placeholder:'OOS DL only', tip:'Only required when an OOS (out-of-state) driver\'s license is used. Leave blank for CO DL.', source:'OOS DL only', warning:null },
+  docMiddleName:   { label:'Document Middle Name', req:false, type:'text', status:'manual', placeholder:'OOS DL only', tip:'Only required when an OOS (out-of-state) driver\'s license is used. Leave blank for CO DL.', source:'OOS DL only', warning:null },
+  expireDate:      { label:'Expire Date', req:false, type:'text', status:'manual', placeholder:'OOS DL only — from the DL', tip:'Only required when an OOS driver\'s license is used. Pull the expiration date directly from the DL.', source:'OOS DL only', warning:null },
+  dob:             { label:'Date of Birth', req:false, type:'text', status:'manual', placeholder:'OOS DL only — from the DL', tip:'Only required when an OOS driver\'s license is used. Pull the date of birth directly from the DL.', source:'OOS DL only', warning:null },
+  // RESIDENCE ADDRESS
+  streetNo:        { label:'Street Number', req:true, type:'text', status:'manual', placeholder:'Numeric portion only (e.g. 1234)', tip:'The numeric portion of the street address only.', source:'CARMA registration address', warning:null },
+  houseSuffix:     { label:'House Suffix', req:false, type:'text', status:'manual', placeholder:'½, ¼, .5 — if applicable', tip:'Only if applicable — examples: ½, ¼, .5. Leave blank if not present in the address.', source:'CARMA registration address', warning:null },
+  dirPrefix:       { label:'Direction Prefix', req:false, type:'select', status:'manual', placeholder:'N, E, S, W — if applicable', tip:'N, E, S, W, NE, NW, SE, SW — only include if it is part of the address. Leave blank if not present.', source:'CARMA registration address', warning:null },
+  streetName:      { label:'Street Name', req:true, type:'text', status:'manual', placeholder:'Street name only (no type/direction)', tip:'The street name only — without the type (AVE, ST, etc.) or any direction.', source:'CARMA registration address', warning:null },
+  streetType:      { label:'Street Type', req:true, type:'select', status:'manual', placeholder:'AVE, BLVD, DR, ST, RD…', tip:'Select the street type abbreviation — AVE, BLVD, CT, DR, LN, RD, ST, WAY, etc.', source:'CARMA registration address', warning:null },
+  dirPostfix:      { label:'Direction Postfix', req:false, type:'select', status:'blank', placeholder:'— Usually blank —', tip:'Leave blank unless the address explicitly has a directional postfix. When in doubt, leave blank.', source:'CARMA — leave blank if unclear', warning:null },
+  aptType:         { label:'APT/Unit Type', req:false, type:'select', status:'manual', placeholder:'APT, STE, UNIT — if applicable', tip:'Type of unit — APT, STE, UNIT, etc. Only populate if the address has a unit.', source:'CARMA registration address', warning:null },
+  aptNo:           { label:'APT/Unit Number', req:false, type:'text', status:'manual', placeholder:'Actual unit number', tip:'The actual unit or apartment number. Only populate if the address has a unit.', source:'CARMA registration address', warning:null },
+  zipCode:         { label:'Zip Code', req:true, type:'text', status:'manual', placeholder:'5-digit zip', tip:'Must match the CARMA registration address exactly.', source:'CARMA registration address', warning:null },
+  city:            { label:'City', req:true, type:'text', status:'manual', placeholder:'City name', tip:'Must match the CARMA registration address exactly.', source:'CARMA registration address', warning:null },
+  county:          { label:'County', req:false, type:'text', status:'verify', placeholder:'Auto-populates from zip code', tip:'Auto-populates from the zip code. Verify that it populated correctly.', source:'Auto-populated from zip code', warning:null },
+  resState:        { label:'State', req:false, type:'text', status:'verify', placeholder:'CO — auto-populates', tip:'Auto-populates as CO. Verify it is correct.', source:'Auto-populated', warning:null },
+  // MAILING
+  addMailing:      { label:'Add Mailing Address (checkbox)', req:false, type:'checkbox', status:'manual', tip:'Check this box only when the mailing address differs from the residence address, or when VITU suggests an alternate address. Must also appear on title application page 1.', source:'CARMA / VITU suggestion', warning:null },
+  mailZip:         { label:'Zip Code', req:false, type:'text', status:'manual', placeholder:'Mailing zip', tip:'Mailing address zip code.', source:'CARMA / Customer', warning:null },
+  mailCity:        { label:'City', req:false, type:'text', status:'manual', placeholder:'Mailing city', tip:'Mailing address city.', source:'CARMA / Customer', warning:null },
+  mailState:       { label:'State', req:false, type:'text', status:'manual', placeholder:'Mailing state', tip:'Mailing address state.', source:'CARMA / Customer', warning:null },
+  mailCountry:     { label:'Country', req:false, type:'text', status:'manual', placeholder:'Mailing country', tip:'Mailing address country.', source:'CARMA / Customer', warning:null },
+  mailLine1:       { label:'Address Line 1', req:false, type:'text', status:'manual', placeholder:'Full address: number + name + type', tip:'Enter the full street address on Line 1 — include street number, name, and type all together (e.g., 1234 MAIN ST).', source:'CARMA / Customer', warning:null },
+  mailLine2:       { label:'Address Line 2', req:false, type:'text', status:'blank', placeholder:'⚠️ NEVER USE — always leave blank', tip:'NEVER USE Address Line 2. Always leave blank regardless of what the address contains. Use APT/Unit fields instead.', source:'N/A — always blank', warning:'Never use Address Line 2 — use the APT/Unit fields instead' },
+  mailAptType:     { label:'APT/Unit Type', req:false, type:'select', status:'manual', placeholder:'APT, STE, UNIT — if applicable', tip:'Type of unit — APT, STE, UNIT, etc. Only if applicable.', source:'CARMA / Customer', warning:null },
+  mailAptNo:       { label:'APT/Unit Number', req:false, type:'text', status:'manual', placeholder:'Actual unit number', tip:'Actual unit number. Only if applicable.', source:'CARMA / Customer', warning:null },
+  // SECONDARY OWNER
+  secApplies:      { label:'Secondary Owner Applies?', req:false, type:'checkbox', status:'verify', tip:'Only complete this section if there is a co-buyer or 3rd-party finance structure on the deal. Skip entirely for single buyers.', source:'Deal structure', warning:null },
+  secType:         { label:'Owner Type', req:false, type:'select', status:'manual', placeholder:'Individual', tip:'Always select "Individual."', source:'Manually set', warning:null },
+  jointTenancy:    { label:'Joint Tenancy', req:false, type:'select', status:'manual', placeholder:'Match the joint tenancy form', tip:'Fill in exactly what was checked/selected on the joint tenancy form the customer signed. Must match that document exactly.', source:'Joint tenancy form', warning:null },
+  secLast:         { label:'Last Name', req:false, type:'text', status:'manual', placeholder:'Exactly as on secondary owner\'s DL', tip:'Exactly as it appears on the secondary owner\'s driver\'s license.', source:'Secondary Driver\'s License', warning:null },
+  secFirst:        { label:'First Name', req:false, type:'text', status:'manual', placeholder:'Exactly as on secondary owner\'s DL', tip:'Exactly as it appears on the secondary owner\'s driver\'s license.', source:'Secondary Driver\'s License', warning:null },
+  secMiddle:       { label:'Middle Name', req:false, type:'text', status:'manual', placeholder:'As on DL (include if present)', tip:'Exactly as it appears on the secondary owner\'s DL. Include if present.', source:'Secondary Driver\'s License', warning:null },
+  secSuffix:       { label:'Suffix', req:false, type:'text', status:'manual', placeholder:'Only if on DL', tip:'Only if it appears on the secondary owner\'s DL.', source:'Secondary Driver\'s License', warning:null },
+  // SEC PROOF OF ID
+  secProofType:    { label:'Proof of Identification', req:false, type:'select', status:'manual', placeholder:'Select document type', tip:'Select the document type for the secondary owner.', source:'Secondary ID document', warning:null },
+  secDocNo:        { label:'Document Number', req:false, type:'text', status:'manual', placeholder:'ID number', tip:'The ID number from the secondary owner\'s document.', source:'Secondary ID document', warning:null },
+  secDocFirst:     { label:'Document First Name', req:false, type:'text', status:'manual', placeholder:'OOS DL only', tip:'Only required when secondary owner uses an OOS driver\'s license.', source:'OOS DL only', warning:null },
+  secDocLast:      { label:'Document Last Name', req:false, type:'text', status:'manual', placeholder:'OOS DL only', tip:'Only required when secondary owner uses an OOS driver\'s license.', source:'OOS DL only', warning:null },
+  secDocMiddle:    { label:'Document Middle Name', req:false, type:'text', status:'manual', placeholder:'OOS DL only', tip:'Only required when secondary owner uses an OOS driver\'s license.', source:'OOS DL only', warning:null },
+  secExpire:       { label:'Expire Date', req:false, type:'text', status:'manual', placeholder:'OOS DL only', tip:'Only required for OOS driver\'s license on the secondary owner.', source:'OOS DL only', warning:null },
+  secDob:          { label:'Date of Birth', req:false, type:'text', status:'manual', placeholder:'OOS DL only', tip:'Only required for OOS driver\'s license on the secondary owner.', source:'OOS DL only', warning:null },
+  // SALE INFO
+  buyersAgent:     { label:'Add Buyer\'s Agent SVID', req:false, type:'radio', status:'blank', tip:'Always "No." Never add a buyer\'s agent SVID. This is never used on standard Carvana CO deals.', source:'N/A', warning:null },
+  saleType:        { label:'Sale Type', req:true, type:'select', status:'verify', placeholder:'Purchase', tip:'Defaults to "Purchase" — this is always correct. Do not change it.', source:'Auto-populated', warning:null },
+  saleDate:        { label:'Date of Sale', req:true, type:'text', status:'manual', placeholder:'Must match CARMA / RPA exactly', tip:'Must match the date of sale in CARMA or RPA exactly. Do not use today\'s date or an estimated date.', source:'CARMA / RPA', warning:'Must match CARMA/RPA sale date exactly' },
+  grossSales:      { label:'Gross Sales Price', req:true, type:'text', status:'manual', placeholder:'From DR0024 exactly', tip:'Must match the gross sales price on the sales tax receipt DR0024 exactly. Discrepancy causes holds.', source:'DR0024', warning:'Must match DR0024 — discrepancy causes holds' },
+  netSales:        { label:'Net Sales Price', req:false, type:'text', status:'verify', placeholder:'Auto-calculates', tip:'Updates automatically based on gross sales price and trade-in. Do not manually edit.', source:'Auto-calculated', warning:null },
+  msrp:            { label:'MSRP ⚠️', req:true, type:'text', status:'manual', placeholder:'⚠️ Fill in AFTER clicking Get Fees', tip:'Come back to fill this in AFTER clicking "Get Fees." The MSRP value is displayed on the fees calculation screen. Do not guess or estimate it.', source:'Found after clicking Get Fees', warning:'Must be filled in AFTER Get Fees — do not enter before that step' },
+  taxHomeRule:     { label:'Tax Amount (Home Rule)', req:false, type:'text', status:'manual', placeholder:'Part 3 of DR0024 — exactly', tip:'Part 3 of the sales tax receipt DR0024. Must match exactly — copy the amount precisely.', source:'DR0024 Part 3', warning:'Must match DR0024 Part 3 exactly' },
+  // TRADE IN
+  tradeInFlag:     { label:'Sale Includes Trade-In Vehicle', req:true, type:'select', status:'manual', placeholder:'No / One', tip:'Select "No" if no trade-in. Select "One" if there is a trade-in listed on the DR0024. Only populate based on what is on the DR0024.', source:'DR0024', warning:null },
+  grossTradeIn:    { label:'Gross Trade-In Amount', req:false, type:'text', status:'verify', placeholder:'Auto-populates based on selection', tip:'Auto-populates based on DR0024 selection. Verify it populated correctly.', source:'DR0024', warning:null },
+  tradeIn1Amt:     { label:'Trade-In 1 Amount', req:false, type:'text', status:'manual', placeholder:'From DR0024 exactly', tip:'Must match the trade-in amount on the DR0024 exactly.', source:'DR0024', warning:null },
+  // TITLE & REG
+  ownershipDoc:    { label:'Ownership Document', req:true, type:'select', status:'manual', placeholder:'Out of State Title', tip:'Always select "Out of State Title." This should not change for standard CO in-state deals.', source:'Manually set', warning:null },
+  titleNo:         { label:'Title Number', req:true, type:'text', status:'manual', placeholder:'Document number from most recent title', tip:'The document number from the most recently issued title. Do not use a prior or older title number.', source:'Physical title document', warning:'Use the most recently issued title — not a prior one' },
+  titleState:      { label:'Title State', req:true, type:'select', status:'manual', placeholder:'AZ / AR / MT', tip:'The state that issued the title. For most Carvana deals: Arizona, Arkansas, or Montana.', source:'Physical title document', warning:null },
+  titleDate:       { label:'Title Issue Date', req:true, type:'text', status:'manual', placeholder:'Date from title — must match exactly', tip:'Must match the issue date on the title document exactly. Do not enter today\'s date.', source:'Physical title document', warning:'Must match title issue date exactly' },
+  // LIENHOLDER
+  lienStampCo:     { label:'Lien Stamp Received by County?', req:false, type:'radio', status:'manual', tip:'Always "No."', source:'Manually set', warning:null },
+  lienRecDate:     { label:'Received Date', req:false, type:'text', status:'verify', placeholder:'Auto-populates after lien stamp applied', tip:'Auto-populates after the lien stamp is applied. Do not manually enter.', source:'Auto-populated after lien stamp', warning:null },
+  electronicLien:  { label:'Electronic Lien?', req:false, type:'radio', status:'manual', tip:'Always "Yes."', source:'Manually set', warning:null },
+  eltInfo:         { label:'ELT # / Electronic Lien Name & Address', req:false, type:'text', status:'verify', placeholder:'Auto-populates from lender name', tip:'Auto-populates from the lender name entered. Verify it populated correctly with the right lender.', source:'Auto-populated from lender name', warning:null },
+  lienDate:        { label:'Lien Recorded Date', req:false, type:'text', status:'manual', placeholder:'Date from Security Agreement', tip:'The date from the Security Agreement — not today\'s date.', source:'Security Agreement', warning:null },
+  lienAmount:      { label:'Amount', req:false, type:'text', status:'manual', placeholder:'Total Amount of Payments from Security Agreement', tip:'Must match the Total Amount of Payments on the security agreement. If Total of Payments is not listed, use Amount Financed.', source:'Security Agreement', warning:'Use Total Amount of Payments; if missing, use Amount Financed' },
+  lienPrevFiled:   { label:'Lien Previously Filed', req:false, type:'radio', status:'manual', tip:'Always "No."', source:'Manually set', warning:null },
+  // TAX ACCOUNT
+  taxAll:          { label:'All Fields', req:false, type:'text', status:'blank', placeholder:'— All fields blank — do not populate —', tip:'All tax account fields are always left blank. Do not populate anything in this section.', source:'N/A — always blank', warning:null },
+  // DMV FEES
+  getFees:         { label:'Click "Get Fees" Button', req:true, type:'select', status:'manual', placeholder:'Click Get Fees to calculate', tip:'Click the "Get Fees" button to calculate all DMV fees. Then verify all values against the DR0024 before proceeding.', source:'Portal action', warning:null },
+  allFees:         { label:'All Fee Values', req:true, type:'text', status:'verify', placeholder:'Verify all values vs. DR0024', tip:'Every fee value shown must match the DR0024 exactly. If any value differs, investigate before finalizing.', source:'DR0024', warning:'Must match DR0024 exactly — verify every line' },
+  salesTaxStatus:  { label:'Sales Tax Status', req:false, type:'text', status:'verify', placeholder:'Should show "Paid"', tip:'Sales tax should always show as "Paid." If it does not, verify the DR0024 and gross sales price entry.', source:'DR0024', warning:null },
+  useTaxStatus:    { label:'Use Tax Status', req:false, type:'text', status:'verify', placeholder:'Will NOT show "Paid" — this is correct', tip:'Use tax will NEVER show as "Paid." This is expected and normal — do not attempt to mark it paid.', source:'Expected behavior — do not change', warning:null },
+  msrpReturn:      { label:'Return to Sale Info → Update MSRP', req:true, type:'text', status:'manual', placeholder:'After fees load, update MSRP in Sale Info', tip:'After fees load on this screen, return to the Sale Info section and enter the MSRP value that is now displayed here.', source:'Fees screen → update Sale Info', warning:'Required — do not finalize without updating MSRP in Sale Info' },
+};
 
-  const sections = [
-    {
-      id: 'transaction',
-      title: 'Transaction Information',
-      icon: '📋',
-      risk: 'high',
-      riskTip: 'Incorrect titling state or transaction type is one of the most common causes of post-submission holds. Verify every field in this section before proceeding.',
-      fields: [
-        { name: 'Location', status: 'verify', tip: 'Auto-defaults to a location — confirm it is the correct dealership location before proceeding.', source: 'Auto-populated — verify' },
-        { name: 'Titling State', status: 'manual', tip: 'Must be set to Colorado (CO). Correct immediately if it defaults to another state.', source: 'Manually set' },
-        { name: 'Acquisition Type', status: 'manual', tip: 'Always select "Colorado Dealer."', source: 'Manually set' },
-        { name: 'Transaction', status: 'manual', tip: 'Always select "Title Only."', source: 'Manually set' },
-        { name: 'Transaction Type', status: 'manual', tip: 'Always select "New Ownership."', source: 'Manually set' },
-        { name: 'Is Vehicle Delivered?', status: 'manual', tip: 'Check CARMA and mark Yes or No accurately. Must reflect actual delivery status.', source: 'CARMA' },
-      ]
-    },
-    {
-      id: 'vehicle',
-      title: 'Vehicle Information',
-      icon: '🚙',
-      risk: 'high',
-      riskTip: 'Style, Color, Unladen Weight, and Odometer are frequent hold triggers. Verify carefully against the physical title after running VIN decode.',
-      fields: [
-        { name: 'VIN', status: 'manual', tip: 'Enter VIN first, then click "Populate from VIN Decode" to auto-fill remaining vehicle fields.', source: 'Title / Paperwork' },
-        { name: 'Stock Number', status: 'manual', tip: 'Must match the deal\'s stock number exactly.', source: 'Deal paperwork' },
-        { name: 'Vehicle Sold As', status: 'manual', tip: 'Always select "Used."', source: 'Manually set' },
-        { name: 'Special Purchase Type', status: 'blank', tip: 'Leave BLANK. Do not populate this field under any circumstances.', source: 'N/A — leave blank' },
-        { name: 'Vehicle Type', status: 'verify', tip: 'Auto-populates from VIN decode. Verify it is correct before continuing.', source: 'VIN decode' },
-        { name: 'Vehicle Class', status: 'verify', tip: 'Auto-populates from VIN decode. Verify it is correct before continuing.', source: 'VIN decode' },
-        { name: 'Year', status: 'verify', tip: 'Auto-populates from VIN decode. Confirm it matches the title.', source: 'VIN decode' },
-        { name: 'Make', status: 'verify', tip: 'Auto-populates as the full make name (e.g., "MAZDA"). Verify against the title.', source: 'VIN decode' },
-        { name: 'Model', status: 'verify', tip: 'Auto-populates in shortened form (e.g., "CX-5"). Verify against the title.', source: 'VIN decode' },
-        { name: 'Style', status: 'verify', tip: 'Auto-populates but is frequently incorrect. Correct if needed using the body style codes below.', source: 'VIN decode — verify carefully' },
-        { name: 'Color', status: 'manual', tip: 'Must match the color as shown across all paperwork (title, bill of sale). Consistency is required.', source: 'Title / Bill of Sale' },
-        { name: 'Unladen Weight', status: 'manual', tip: 'Pull from the MT or AR title. If the title is AZ, leave the auto-populated value as-is — do not change it.', source: 'MT or AR title (not AZ)' },
-        { name: 'Fuel Type', status: 'verify', tip: 'Should be correct from VIN decode. If wrong, check vehicle details in CARMA and correct it.', source: 'VIN decode / CARMA' },
-        { name: 'Override Fuel Type', status: 'blank', tip: 'Only check this box if the fuel type decoded incorrectly and needs to be corrected. Otherwise leave unchecked.', source: 'Only if needed' },
-        { name: 'Plug In', status: 'verify', tip: 'Always "No" unless the vehicle is a full electric or a specific plug-in hybrid model.', source: 'Vehicle specs' },
-        { name: 'Override Plug In', status: 'blank', tip: 'Always "No" unless an error appears when clicking "Get Fees." Only override at that point.', source: 'Only if error appears' },
-        { name: 'Non-Fleet Unit Number', status: 'blank', tip: 'Always leave BLANK.', source: 'N/A — leave blank' },
-        { name: 'Odometer Validity', status: 'verify', tip: 'Defaults to "Actual Mileage" — this is correct. Do not change it.', source: 'Auto-populated' },
-        { name: 'Odometer Reading', status: 'manual', tip: 'Must match the bill of sale exactly. A mismatch here is a common hold cause.', source: 'Bill of Sale' },
-        { name: 'Odometer Unit', status: 'verify', tip: 'Defaults to "Actual Miles" — this is correct. Do not change it.', source: 'Auto-populated' },
-      ],
-      subnote: {
-        title: '📌 Style Field — Body Type Codes Reference',
-        items: ['CP — Coupe', 'CV — Convertible', 'SD — Sedan', 'UP — SUV / Utility Passenger', 'PV — Passenger Van', 'SW — Station Wagon', 'PK — Pickup Truck']
-      }
-    },
-    {
-      id: 'owner',
-      title: 'Owner Information',
-      icon: '👤',
-      risk: 'high',
-      riskTip: 'Name fields must match the driver\'s license character-for-character. Transposed names, missing middle names, or incorrect suffixes are common hold triggers.',
-      fields: [
-        { name: 'Primary Owner Type', status: 'manual', tip: 'Always select "Individual."', source: 'Manually set' },
-        { name: 'Last Name', status: 'manual', tip: 'Enter exactly as it appears on the driver\'s license — spelling, hyphens, and spacing must match.', source: 'Driver\'s License' },
-        { name: 'First Name', status: 'manual', tip: 'Enter exactly as it appears on the driver\'s license.', source: 'Driver\'s License' },
-        { name: 'Middle Name', status: 'manual', tip: 'Include if present on the DL. Enter exactly as it appears — do not abbreviate.', source: 'Driver\'s License' },
-        { name: 'Suffix', status: 'manual', tip: 'Only enter if the suffix appears on the driver\'s license (Jr., Sr., III, etc.).', source: 'Driver\'s License' },
-      ]
-    },
-    {
-      id: 'proof-id',
-      title: 'Proof of Identification',
-      icon: '🪪',
-      risk: 'med',
-      riskTip: 'Out-of-state driver\'s licenses require additional fields. Missing expiration date or date of birth on OOS DL submissions causes holds.',
-      fields: [
-        { name: 'Proof of Identification', status: 'manual', tip: 'Select the document type that applies to this customer (CO DL, OOS DL, US Passport, etc.).', source: 'Customer\'s ID document' },
-        { name: 'Document Number', status: 'manual', tip: 'The ID number or document number from the selected identification document.', source: 'Customer\'s ID document' },
-        { name: 'Document Name Fields', status: 'manual', tip: 'First, Last, Middle name fields — only required when an OOS (out-of-state) driver\'s license is used.', source: 'OOS DL only' },
-        { name: 'Expiration Date', status: 'manual', tip: 'Only required when using an OOS driver\'s license. Pull directly from the DL.', source: 'OOS DL only' },
-        { name: 'Date of Birth', status: 'manual', tip: 'Only required when using an OOS driver\'s license. Pull directly from the DL.', source: 'OOS DL only' },
-      ]
-    },
-    {
-      id: 'residence',
-      title: 'Residence Address',
-      icon: '🏠',
-      risk: 'high',
-      riskTip: 'Address must come from CARMA (the registration address). Formatting errors are a leading hold cause. Use the CO Address Formatter tool if DRIVES rejects the address.',
-      fields: [
-        { name: 'Street Number', status: 'manual', tip: 'The numeric portion of the street address only (e.g., 1234).', source: 'CARMA registration address' },
-        { name: 'House Suffix', status: 'manual', tip: 'Only if applicable — examples: ½, ¼, .5. Leave blank if not present.', source: 'CARMA registration address' },
-        { name: 'Direction Prefix', status: 'manual', tip: 'N, E, S, W, NE, NW, SE, SW — only include if it is part of the address.', source: 'CARMA registration address' },
-        { name: 'Street Name', status: 'manual', tip: 'The street name only — without the type or any direction.', source: 'CARMA registration address' },
-        { name: 'Street Type', status: 'manual', tip: 'AVE, BLVD, CT, DR, LN, RD, ST, WAY, etc.', source: 'CARMA registration address' },
-        { name: 'Direction Postfix', status: 'blank', tip: 'Leave blank unless the address explicitly has a directional postfix. When in doubt, leave blank.', source: 'CARMA — leave blank if unclear' },
-        { name: 'APT/Unit Type', status: 'manual', tip: 'Type of unit — APT, STE, UNIT, etc. Only populate if applicable.', source: 'CARMA registration address' },
-        { name: 'APT/Unit Number', status: 'manual', tip: 'The actual unit or apartment number. Only populate if applicable.', source: 'CARMA registration address' },
-        { name: 'Zip Code', status: 'manual', tip: 'Must match the CARMA registration address exactly.', source: 'CARMA registration address' },
-        { name: 'City', status: 'manual', tip: 'Must match the CARMA registration address exactly.', source: 'CARMA registration address' },
-        { name: 'County', status: 'verify', tip: 'Auto-populates from the zip code. Verify that it populated correctly.', source: 'Auto-populated from zip' },
-        { name: 'State', status: 'verify', tip: 'Auto-populates as CO. Verify it is correct.', source: 'Auto-populated' },
-      ]
-    },
-    {
-      id: 'mailing',
-      title: 'Mailing Address',
-      icon: '📮',
-      risk: 'low',
-      riskTip: 'Only add a mailing address when it differs from the residence address, or when VITU suggests an alternate. Must also appear on the title application page 1.',
-      fields: [
-        { name: 'Add Mailing Address (checkbox)', status: 'manual', tip: 'Check this box only when the mailing address differs from the residence address, or when VITU suggests an alternate address.', source: 'CARMA / VITU suggestion' },
-        { name: 'Zip Code', status: 'manual', tip: 'Mailing address zip code.', source: 'CARMA / Customer' },
-        { name: 'City', status: 'manual', tip: 'Mailing address city.', source: 'CARMA / Customer' },
-        { name: 'State', status: 'manual', tip: 'Mailing address state.', source: 'CARMA / Customer' },
-        { name: 'Country', status: 'manual', tip: 'Mailing address country.', source: 'CARMA / Customer' },
-        { name: 'Address Line 1', status: 'manual', tip: 'Enter the full street address on Line 1 — include street number, name, and type all together.', source: 'CARMA / Customer' },
-        { name: 'Address Line 2', status: 'blank', tip: '⚠️ NEVER USE Address Line 2. Always leave blank regardless of what the address contains.', source: 'N/A — always blank' },
-        { name: 'APT/Unit Type', status: 'manual', tip: 'Type of unit — APT, STE, UNIT, etc. Only populate if applicable.', source: 'CARMA / Customer' },
-        { name: 'APT/Unit Number', status: 'manual', tip: 'Actual unit number. Only populate if applicable.', source: 'CARMA / Customer' },
-      ]
-    },
-    {
-      id: 'secondary',
-      title: 'Secondary Owner',
-      icon: '👥',
-      risk: 'med',
-      riskTip: 'Secondary owner only applies to co-buyer / 3rd-party finance deals. Joint tenancy selection must match the signed joint tenancy form.',
-      fields: [
-        { name: 'Section Applies?', status: 'verify', tip: 'Only complete this section if there is a co-buyer or 3rd-party finance structure on the deal. Skip entirely for single buyers.', source: 'Deal structure' },
-        { name: 'Owner Type', status: 'manual', tip: 'Always select "Individual."', source: 'Manually set' },
-        { name: 'Joint Tenancy', status: 'manual', tip: 'Fill in exactly what was checked/selected on the joint tenancy form the customer signed.', source: 'Joint tenancy form' },
-        { name: 'Last Name', status: 'manual', tip: 'Exactly as it appears on the secondary owner\'s driver\'s license.', source: 'Secondary Driver\'s License' },
-        { name: 'First Name', status: 'manual', tip: 'Exactly as it appears on the secondary owner\'s driver\'s license.', source: 'Secondary Driver\'s License' },
-        { name: 'Middle Name', status: 'manual', tip: 'Exactly as it appears on the secondary owner\'s DL. Include if present.', source: 'Secondary Driver\'s License' },
-        { name: 'Suffix', status: 'manual', tip: 'Only if it appears on the secondary owner\'s DL.', source: 'Secondary Driver\'s License' },
-      ]
-    },
-    {
-      id: 'sec-proof-id',
-      title: 'Secondary Owner — Proof of ID',
-      icon: '🪪',
-      risk: 'med',
-      riskTip: 'Same rules as primary owner ID. OOS DL requires name, expiration date, and DOB fields.',
-      fields: [
-        { name: 'Proof of Identification', status: 'manual', tip: 'Select the document type that applies to the secondary owner.', source: 'Secondary ID document' },
-        { name: 'Document Number', status: 'manual', tip: 'The ID number from the secondary owner\'s document.', source: 'Secondary ID document' },
-        { name: 'Document Name Fields', status: 'manual', tip: 'Only required when secondary owner uses an OOS driver\'s license.', source: 'OOS DL only' },
-        { name: 'Expiration Date', status: 'manual', tip: 'Only required for OOS driver\'s license.', source: 'OOS DL only' },
-        { name: 'Date of Birth', status: 'manual', tip: 'Only required for OOS driver\'s license.', source: 'OOS DL only' },
-      ]
-    },
-    {
-      id: 'sale',
-      title: 'Buyers Agent & Sale Info',
-      icon: '💰',
-      risk: 'high',
-      riskTip: '⚠️ MSRP must be filled in AFTER clicking Get Fees — come back to this section. Gross sales price and tax amount must match DR0024 exactly. Date of sale must match CARMA or RPA.',
-      fields: [
-        { name: 'Add Buyer\'s Agent SVID', status: 'blank', tip: 'Always "No." Never add a buyer\'s agent SVID.', source: 'N/A' },
-        { name: 'Sale Type', status: 'verify', tip: 'Defaults to "Purchase" — this is always correct. Do not change it.', source: 'Auto-populated' },
-        { name: 'Date of Sale', status: 'manual', tip: 'Must match the date of sale in CARMA or RPA exactly.', source: 'CARMA / RPA' },
-        { name: 'Gross Sales Price', status: 'manual', tip: 'Must match the sales tax receipt DR0024 exactly. A discrepancy here causes holds.', source: 'DR0024' },
-        { name: 'Net Sales Price', status: 'verify', tip: 'Updates automatically — do not manually edit this field.', source: 'Auto-calculated' },
-        { name: 'MSRP ⚠️', status: 'manual', tip: 'COME BACK TO THIS after clicking "Get Fees." The MSRP value is found on the fees calculation screen. Do not guess it.', source: 'Found after clicking Get Fees' },
-        { name: 'Tax Amount (Home Rule)', status: 'manual', tip: 'Part 3 of the sales tax receipt DR0024. Must match exactly — copy precisely.', source: 'DR0024 Part 3' },
-      ]
-    },
-    {
-      id: 'trade',
-      title: 'Trade-In',
-      icon: '🔄',
-      risk: 'low',
-      riskTip: 'Only populate if there is a trade-in listed on the DR0024. All values must match the DR0024 exactly.',
-      fields: [
-        { name: 'Sale Includes Trade-In Vehicle', status: 'manual', tip: 'Select "No" if no trade-in. Select "One" if there is a trade-in listed on the DR0024.', source: 'DR0024' },
-        { name: 'Gross Trade-In Amount', status: 'manual', tip: 'Auto-populates based on your selection above. Verify it populated correctly.', source: 'DR0024' },
-        { name: 'Trade-In 1 Amount', status: 'manual', tip: 'Must match the trade-in amount on the DR0024 exactly.', source: 'DR0024' },
-      ]
-    },
-    {
-      id: 'title-reg',
-      title: 'Title & Registration Info',
-      icon: '📄',
-      risk: 'high',
-      riskTip: 'Title number and issue date must match the physical title document exactly. Using the dealer title number instead of the customer title is a common error.',
-      fields: [
-        { name: 'Ownership Document', status: 'manual', tip: 'Always select "Out of State Title."', source: 'Manually set' },
-        { name: 'Title Number', status: 'manual', tip: 'The document number from the most recently issued title — not a prior title.', source: 'Physical title document' },
-        { name: 'Title State', status: 'manual', tip: 'The state that issued the title. For most Carvana deals: Arizona, Arkansas, or Montana.', source: 'Physical title document' },
-        { name: 'Title Issue Date', status: 'manual', tip: 'Must match the issue date on the title document exactly. Do not enter today\'s date.', source: 'Physical title document' },
-      ]
-    },
-    {
-      id: 'lien',
-      title: 'Lienholder Info',
-      icon: '🔒',
-      risk: 'high',
-      riskTip: 'Lien must be applied within 30 days of the sale date. Amount must match Total Amount of Payments. This section applies to financed deals only.',
-      fields: [
-        { name: 'Lien Stamp Received by County?', status: 'manual', tip: 'Always "No."', source: 'Manually set' },
-        { name: 'Received Date', status: 'verify', tip: 'Auto-populates after the lien stamp is applied. Do not manually enter.', source: 'Auto-populated after lien stamp' },
-        { name: 'Electronic Lien?', status: 'manual', tip: 'Always "Yes."', source: 'Manually set' },
-        { name: 'ELT # / Electronic Lien Name & Address', status: 'verify', tip: 'Auto-populates from the lender name entered. Verify it populated correctly before moving on.', source: 'Auto-populated from lender name' },
-        { name: 'Lien Recorded Date', status: 'manual', tip: 'The date from the Security Agreement — not today\'s date.', source: 'Security Agreement' },
-        { name: 'Amount', status: 'manual', tip: 'Must match the Total Amount of Payments on the security agreement. If Total of Payments is not listed, use Amount Financed instead.', source: 'Security Agreement' },
-        { name: 'Lien Previously Filed', status: 'manual', tip: 'Always "No."', source: 'Manually set' },
-      ]
-    },
-    {
-      id: 'tax',
-      title: 'Tax Account Info',
-      icon: '🧾',
-      risk: 'low',
-      riskTip: 'No action needed here. Leave the entire section blank.',
-      fields: [
-        { name: 'All Fields in This Section', status: 'blank', tip: 'All tax account fields are always left blank. Do not populate anything in this section.', source: 'N/A — always blank', wide: true },
-      ]
-    },
-    {
-      id: 'fees',
-      title: 'DMV Fees — Get Fees',
-      icon: '💵',
-      risk: 'high',
-      riskTip: 'Fee values must match DR0024 exactly. Sales tax should show "Paid." Use tax will NEVER show "Paid" — this is expected behavior. After fees load, return to Sale Info to enter MSRP.',
-      fields: [
-        { name: 'Click "Get Fees"', status: 'manual', tip: 'Click the Get Fees button to calculate fees. All values will then populate on screen.', source: 'Portal action' },
-        { name: 'All Fee Values', status: 'verify', tip: 'Every fee value shown must match the DR0024 exactly. If values differ, investigate before finalizing.', source: 'DR0024' },
-        { name: 'Sales Tax Status', status: 'verify', tip: 'Should show as "Paid." If it does not, verify the DR0024 and gross sales price entry.', source: 'DR0024' },
-        { name: 'Use Tax Status', status: 'verify', tip: 'Use tax will NEVER show as "Paid." This is expected and normal — do not attempt to mark it paid.', source: 'Expected behavior' },
-        { name: 'MSRP (Return to Sale Info)', status: 'manual', tip: 'After fees load, return to the Sale Info section and enter the MSRP value found on this fees screen.', source: 'Fees screen → update Sale Info', wide: true },
-      ]
-    },
-    {
-      id: 'final',
-      title: 'Final Steps',
-      icon: '✅',
-      risk: 'high',
-      riskTip: 'Complete all steps in order. Do not Finalize until every document has been uploaded and reviewed. Apply lien stamp only for financed deals.',
-      finalSteps: [
-        { label: 'Mark as Sold', note: 'Mark the deal as sold in the portal before uploading any documents.' },
-        { label: 'Upload Lien Stamp Documents', note: 'Finance deals only — upload lien stamp documents before applying the lien stamp.' },
-        { label: 'Apply Lien Stamp', note: 'Financed deals ONLY. Do not apply on cash deals. Must be done within 30 days of sale date.' },
-        { label: 'Upload Registration Packet Documents', note: 'Upload all required registration documents for this deal.' },
-        { label: 'Review', note: 'Review all submitted information for accuracy before finalizing.' },
-        { label: 'Finalize', note: 'Submit — only after all documents are uploaded and the review is complete.' },
-      ]
-    }
-  ];
+// ══════════════════════════════════════════════════════════════════
+// SECTION DEFINITIONS
+// layout: array of rows; each row is array of field IDs (null = spacer)
+// ══════════════════════════════════════════════════════════════════
+const SECTIONS = [
+  {
+    id:'transaction', title:'Transaction Information', icon:'📋', risk:'high',
+    riskTip:'Incorrect titling state or transaction type is one of the most common causes of post-submission holds. Verify every field before proceeding.',
+    layout:[
+      [{id:'location',w:'w2'},{id:'titlingState',w:'w1'},{id:'acquisitionType',w:'w2'}],
+      [{id:'transaction',w:'w2'},{id:'transactionType',w:'w2'}],
+      [{id:'isDelivered',w:'w2'}],
+    ]
+  },
+  {
+    id:'vehicle', title:'Vehicle Information', icon:'🚙', risk:'high',
+    riskTip:'Style, Color, Unladen Weight, and Odometer are frequent hold triggers. Verify carefully against the physical title after running VIN decode.',
+    hasSummaryBar:true,
+    hasPopulateBtn:true,
+    layout:[
+      [{id:'vin',w:'w3'},{id:'stockNo',w:'w2'},{id:'soldAs',w:'w2'},{id:'specialPurchase',w:'w2'}],
+      [{id:'vehicleType',w:'w2'},{id:'vehicleClass',w:'w2'},{id:'year',w:'w1'},{id:'make',w:'w2'}],
+      [{id:'model',w:'w2'},{id:'style',w:'w2'},{id:'color',w:'w2'},{id:'unladenWeight',w:'w1'}],
+      [{id:'fuelType',w:'w2'}],
+      [{id:'overrideFuel',w:'w2'},{id:'plugin',w:'w2'},{id:'overridePlugin',w:'w2'}],
+      [{id:'fleetNo',w:'w2'},{id:'odomValidity',w:'w2'},{id:'odomReading',w:'w1'},{id:'odomUnit',w:'w1'}],
+    ],
+    subnote:'Style codes: CP=Coupe | CV=Convertible | SD=Sedan | UP=SUV | PV=Passenger Van | SW=Station Wagon | PK=Pickup'
+  },
+  {
+    id:'owner', title:'Owner Information', icon:'👤', risk:'high',
+    riskTip:'Name fields must match the driver\'s license character-for-character. Transposed or missing middle names are common hold triggers.',
+    layout:[
+      [{id:'ownerType',w:'w2'}],
+      [{id:'lastName',w:'w2'},{id:'firstName',w:'w2'},{id:'middleName',w:'w2'},{id:'suffix',w:'w1'}],
+    ]
+  },
+  {
+    id:'proofid', title:'Proof of Identification', icon:'🪪', risk:'med',
+    riskTip:'OOS driver\'s licenses require additional fields. Missing expiration date or DOB causes holds.',
+    layout:[
+      [{id:'proofType',w:'w2'},{id:'docNumber',w:'w2'}],
+      [{id:'docFirstName',w:'w2'},{id:'docLastName',w:'w2'},{id:'docMiddleName',w:'w2'}],
+      [{id:'expireDate',w:'w2'},{id:'dob',w:'w2'}],
+    ]
+  },
+  {
+    id:'residence', title:'Residence Address', icon:'🏠', risk:'high',
+    riskTip:'Address must come from CARMA (the registration address). Address formatting errors are a leading hold cause.',
+    layout:[
+      [{id:'streetNo',w:'w1'},{id:'houseSuffix',w:'w1'},{id:'dirPrefix',w:'w1'},{id:'streetName',w:'w3'},{id:'streetType',w:'w2'}],
+      [{id:'dirPostfix',w:'w1'},{id:'aptType',w:'w2'},{id:'aptNo',w:'w1'}],
+      [{id:'zipCode',w:'w1'},{id:'city',w:'w2'},{id:'county',w:'w2'},{id:'resState',w:'w1'}],
+    ]
+  },
+  {
+    id:'mailing', title:'Mailing Address', icon:'📮', risk:'low',
+    riskTip:'Only add a mailing address when it differs from residence, or when VITU suggests an alternate. Must also appear on title application page 1.',
+    layout:[
+      [{id:'addMailing',w:'w4'}],
+      [{id:'mailZip',w:'w1'},{id:'mailCity',w:'w2'},{id:'mailState',w:'w1'},{id:'mailCountry',w:'w1'}],
+      [{id:'mailLine1',w:'w4'}],
+      [{id:'mailLine2',w:'w4'}],
+      [{id:'mailAptType',w:'w2'},{id:'mailAptNo',w:'w1'}],
+    ]
+  },
+  {
+    id:'secondary', title:'Secondary Owner', icon:'👥', risk:'med',
+    riskTip:'Only applies to co-buyer / 3rd-party finance deals. Joint tenancy must match the signed form.',
+    layout:[
+      [{id:'secApplies',w:'w4'}],
+      [{id:'secType',w:'w2'},{id:'jointTenancy',w:'w2'}],
+      [{id:'secLast',w:'w2'},{id:'secFirst',w:'w2'},{id:'secMiddle',w:'w2'},{id:'secSuffix',w:'w1'}],
+    ]
+  },
+  {
+    id:'secproofid', title:'Secondary Owner — Proof of ID', icon:'🪪', risk:'med',
+    riskTip:'Same rules as primary ID. OOS DL requires name, expiration date, and DOB.',
+    layout:[
+      [{id:'secProofType',w:'w2'},{id:'secDocNo',w:'w2'}],
+      [{id:'secDocFirst',w:'w2'},{id:'secDocLast',w:'w2'},{id:'secDocMiddle',w:'w2'}],
+      [{id:'secExpire',w:'w2'},{id:'secDob',w:'w2'}],
+    ]
+  },
+  {
+    id:'sale', title:'Buyers Agent & Sale Info', icon:'💰', risk:'high',
+    riskTip:'⚠️ MSRP must be filled in AFTER Get Fees. Gross sales price and tax amount must match DR0024 exactly.',
+    layout:[
+      [{id:'buyersAgent',w:'w2'}],
+      [{id:'saleType',w:'w2'},{id:'saleDate',w:'w2'}],
+      [{id:'grossSales',w:'w2'},{id:'netSales',w:'w2'}],
+      [{id:'msrp',w:'w2'},{id:'taxHomeRule',w:'w2'}],
+    ]
+  },
+  {
+    id:'trade', title:'Trade-In', icon:'🔄', risk:'low',
+    riskTip:'Only populate if there is a trade-in on the DR0024. All values must match DR0024 exactly.',
+    layout:[
+      [{id:'tradeInFlag',w:'w2'}],
+      [{id:'grossTradeIn',w:'w2'},{id:'tradeIn1Amt',w:'w2'}],
+    ]
+  },
+  {
+    id:'titlereg', title:'Title & Registration Info', icon:'📄', risk:'high',
+    riskTip:'Title number and issue date must match the physical title document exactly.',
+    layout:[
+      [{id:'ownershipDoc',w:'w2'}],
+      [{id:'titleNo',w:'w2'},{id:'titleState',w:'w2'},{id:'titleDate',w:'w2'}],
+    ]
+  },
+  {
+    id:'lien', title:'Lienholder Info', icon:'🔒', risk:'high',
+    riskTip:'Lien must be applied within 30 days of sale date. Financed deals only. Amount must match Total Amount of Payments.',
+    layout:[
+      [{id:'lienStampCo',w:'w2'},{id:'lienRecDate',w:'w2'}],
+      [{id:'electronicLien',w:'w2'},{id:'eltInfo',w:'w3'}],
+      [{id:'lienDate',w:'w2'},{id:'lienAmount',w:'w2'}],
+      [{id:'lienPrevFiled',w:'w2'}],
+    ]
+  },
+  {
+    id:'tax', title:'Tax Account Info', icon:'🧾', risk:'low',
+    riskTip:'No action needed. Leave the entire section blank.',
+    layout:[
+      [{id:'taxAll',w:'w4'}],
+    ]
+  },
+  {
+    id:'fees', title:'DMV Fees — Get Fees', icon:'💵', risk:'high',
+    riskTip:'Fees must match DR0024 exactly. After fees load, return to Sale Info to enter MSRP. Use tax will never show Paid.',
+    layout:[
+      [{id:'getFees',w:'w2'}],
+      [{id:'allFees',w:'w2'},{id:'salesTaxStatus',w:'w2'},{id:'useTaxStatus',w:'w2'}],
+      [{id:'msrpReturn',w:'w4'}],
+    ]
+  },
+  {
+    id:'final', title:'Final Steps', icon:'✅', risk:'high',
+    riskTip:'Complete all steps in order. Apply lien stamp for financed deals only. Do not Finalize until all documents are uploaded.',
+    finalSteps:[
+      { label:'Mark as Sold', note:'Mark the deal as sold in the portal before uploading documents.' },
+      { label:'Upload Lien Stamp Documents', note:'Finance deals only — upload before applying lien stamp.' },
+      { label:'Apply Lien Stamp', note:'Financed deals ONLY. Do not apply on cash deals. Must be within 30 days of sale.' },
+      { label:'Upload Registration Packet Documents', note:'Upload all required registration documents for this deal.' },
+      { label:'Review', note:'Review all submitted information carefully for accuracy before finalizing.' },
+      { label:'Finalize', note:'Submit — only after all documents are uploaded and review is complete.' },
+    ]
+  }
+];
 
-  // ─── STATE ──────────────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════
+let currentSec = SECTIONS[0].id;
+let activeField = null;
+let completed = new Set(JSON.parse(localStorage.getItem('vitu_done')||'[]'));
+let finalDone  = new Set(JSON.parse(localStorage.getItem('vitu_final')||'[]'));
 
-  let currentId = sections[0].id;
-  let completedSet = new Set(JSON.parse(localStorage.getItem('co_vitu_done') || '[]'));
-  let finalChecked = new Set(JSON.parse(localStorage.getItem('co_vitu_final') || '[]'));
+function save(){
+  localStorage.setItem('vitu_done', JSON.stringify([...completed]));
+  localStorage.setItem('vitu_final',JSON.stringify([...finalDone]));
+}
 
-  function saveState() {
-    localStorage.setItem('co_vitu_done', JSON.stringify([...completedSet]));
-    localStorage.setItem('co_vitu_final', JSON.stringify([...finalChecked]));
+// ══════════════════════════════════════════════════════════════════
+// BUILD NAV
+// ══════════════════════════════════════════════════════════════════
+function buildNav(){
+  const nav = document.getElementById('navCol');
+  nav.innerHTML = `<div class="nav-group-label">Sections</div>`;
+  SECTIONS.forEach(s=>{
+    const done = completed.has(s.id);
+    const active = s.id===currentSec;
+    const rc = s.risk==='high'?'rh':s.risk==='med'?'rm':'rl';
+    const rl = s.risk==='high'?'HIGH':s.risk==='med'?'MED':'LOW';
+    const d = document.createElement('div');
+    d.className=`nav-item${active?' active':''}`;
+    d.innerHTML=`
+      <span class="nav-ico">${s.icon}</span>
+      <span class="nav-txt">${s.title}</span>
+      <span class="nav-right-wrap">
+        <span class="risk-chip ${rc}">${rl}</span>
+        <span class="nav-chk ${done?'done':'pend'}">${done?'✓':'○'}</span>
+      </span>`;
+    d.onclick=()=>navigate(s.id);
+    nav.appendChild(d);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════
+// BUILD PROGRESS
+// ══════════════════════════════════════════════════════════════════
+function updateProgress(){
+  const pct = Math.round(completed.size/SECTIONS.length*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progText').textContent=`${completed.size} / ${SECTIONS.length} sections`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// RENDER FIELD (portal replica)
+// ══════════════════════════════════════════════════════════════════
+function renderField(id, wClass){
+  const f = F[id];
+  if(!f) return `<div class="vf ${wClass}"></div>`;
+  const isActive = id===activeField;
+  const sc = `status-${f.status}`;
+  const req = f.req?`<span class="req">*</span>`:'';
+
+  let input = '';
+  if(f.type==='text'||f.type==='date'){
+    input=`<input type="text" class="${sc}" placeholder="${f.placeholder||''}" data-fid="${id}" readonly />`;
+  } else if(f.type==='select'){
+    input=`<select class="${sc}" data-fid="${id}">
+      <option value="">${f.placeholder||'— Select —'}</option>
+    </select>`;
+  } else if(f.type==='radio'){
+    input=`<div class="radio-group">
+      <label><input type="radio" name="${id}" data-fid="${id}"> Yes</label>
+      <label><input type="radio" name="${id}" data-fid="${id}" checked> No</label>
+    </div>`;
+  } else if(f.type==='checkbox'){
+    input=`<div class="checkbox-row">
+      <input type="checkbox" id="cb_${id}" data-fid="${id}">
+      <label for="cb_${id}">${f.placeholder||f.label}</label>
+    </div>`;
   }
 
-  // ─── SIDEBAR ─────────────────────────────────────────────────────────────────
+  return `
+    <div class="vf ${wClass}${isActive?' active':''}" id="vf_${id}">
+      <label class="vf-label" data-fid="${id}">${f.label}${req}</label>
+      ${input}
+    </div>`;
+}
 
-  function buildSidebar() {
-    const sb = document.getElementById('sidebar');
-    sb.innerHTML = `<div class="sidebar-label">Sections</div>`;
-    sections.forEach(s => {
-      const done = completedSet.has(s.id);
-      const active = s.id === currentId;
-      const riskClass = s.risk === 'high' ? 'risk-high' : s.risk === 'med' ? 'risk-med' : 'risk-low';
-      const riskLabel = s.risk === 'high' ? 'HIGH' : s.risk === 'med' ? 'MED' : 'LOW';
-      const div = document.createElement('div');
-      div.className = `nav-item ${active ? 'active' : ''}`;
-      div.innerHTML = `
-        <span class="nav-icon">${s.icon}</span>
-        <span class="nav-text">${s.title}</span>
-        <span class="nav-right">
-          <span class="risk-chip ${riskClass}">${riskLabel}</span>
-          <span class="nav-check ${done ? 'done' : 'pending'}">${done ? '✓' : '○'}</span>
-        </span>
-      `;
-      div.onclick = () => navigate(s.id);
-      sb.appendChild(div);
+// ══════════════════════════════════════════════════════════════════
+// RENDER PORTAL SECTION
+// ══════════════════════════════════════════════════════════════════
+function renderPortal(sec){
+  const el = document.getElementById('portalCol');
+  const riskCls = sec.risk;
+  const riskIco = sec.risk==='high'?'🔴':sec.risk==='med'?'🟡':'🟢';
+  const riskLbl = sec.risk==='high'?'High Hold Risk':sec.risk==='med'?'Medium Hold Risk':'Low Hold Risk';
+  const isDone = completed.has(sec.id);
+  const idx = SECTIONS.findIndex(s=>s.id===sec.id);
+  const next = SECTIONS[idx+1];
+
+  let bodyHTML = '';
+
+  if(sec.finalSteps){
+    const steps = sec.finalSteps.map((st,i)=>{
+      const key=`${sec.id}-${i}`;
+      const chk=finalDone.has(key);
+      return `<div class="final-step-row ${chk?'done':''}" id="fsr_${i}" onclick="toggleFinal('${sec.id}',${i})">
+        <input type="checkbox" ${chk?'checked':''} onclick="event.stopPropagation();toggleFinal('${sec.id}',${i})">
+        <div>
+          <div class="fs-label">${st.label}</div>
+          <div class="fs-note">${st.note}</div>
+        </div>
+      </div>`;
+    }).join('');
+    bodyHTML=`<div class="final-checklist">${steps}</div>`;
+  } else {
+    let rowsHTML = sec.layout.map(row=>{
+      const cells = row.map(cell=>renderField(cell.id,cell.w)).join('');
+      return `<div class="vitu-row">${cells}</div>`;
+    }).join('');
+    if(sec.subnote){
+      rowsHTML+=`<div style="padding:8px 0 0;font-size:11px;color:#475569;background:#fffbeb;border:1px solid #fde68a;border-radius:4px;padding:8px 12px;margin-top:6px;">
+        📌 ${sec.subnote}</div>`;
+    }
+    bodyHTML=`<div class="vitu-body">${rowsHTML}</div>`;
+  }
+
+  const summaryBar = sec.hasSummaryBar?`
+    <div class="vitu-summary-bar">
+      <div class="vitu-summary-item"><div class="vitu-summary-label">Make, Model and Year</div><div class="vitu-summary-value">— VIN decode required —</div></div>
+      <div class="vitu-summary-item"><div class="vitu-summary-label">Style</div><div class="vitu-summary-value">—</div></div>
+      <div class="vitu-summary-item"><div class="vitu-summary-label">Fuel Type</div><div class="vitu-summary-value">—</div></div>
+      <div class="vitu-summary-item"><div class="vitu-summary-label">Unladen/Gross Weight</div><div class="vitu-summary-value">—</div></div>
+    </div>`:'';
+
+  const populateBtn = sec.hasPopulateBtn?`<button class="vitu-populate-btn" onclick="return false">Populate from VIN Decode</button>`:'';
+
+  el.innerHTML=`
+    <div class="hold-bar ${riskCls}">
+      <div class="hold-bar-ico">${riskIco}</div>
+      <div class="hold-bar-body">
+        <div class="hold-bar-title">${riskLbl}</div>
+        <div class="hold-bar-text">${sec.riskTip}</div>
+      </div>
+    </div>
+
+    <div class="vitu-section">
+      <div class="vitu-sec-header">
+        <span class="vitu-sec-title">${sec.title.toUpperCase()}</span>
+        ${populateBtn}
+      </div>
+      ${summaryBar}
+      ${bodyHTML}
+    </div>
+
+    <button class="mark-btn ${isDone?'done':'todo'}" id="markBtn" onclick="toggleDone('${sec.id}')">
+      ${isDone?'✓ Section Complete':'✓ Mark Section Complete'}
+    </button>
+    ${next?`<button class="next-btn" onclick="navigate('${next.id}')">Next: ${next.title} →</button>`:''}
+  `;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// GUIDE PANEL: idle (section checklist)
+// ══════════════════════════════════════════════════════════════════
+function renderGuideIdle(sec){
+  const gb = document.getElementById('guideBody');
+  if(!sec.layout){
+    gb.innerHTML=`<div class="guide-checklist"><div class="guide-sec-badge">${sec.title}</div><p style="font-size:12px;color:#94a3b8;padding:8px 0;">Use the checkboxes in the portal to track final steps.</p></div>`;
+    return;
+  }
+
+  const statusDot={auto:'dot-auto',verify:'dot-verify',manual:'dot-manual',blank:'dot-blank'};
+  const badgeCls={auto:'gb-auto',verify:'gb-verify',manual:'gb-manual',blank:'gb-blank'};
+  const badgeLbl={auto:'Auto',verify:'Verify',manual:'Enter',blank:'Blank'};
+
+  const allFields = sec.layout.flat().map(cell=>cell.id);
+  const rows = allFields.map(id=>{
+    const f=F[id];
+    if(!f)return '';
+    const isAct = id===activeField;
+    return `<div class="guide-field-row${isAct?' active':''}" data-fid="${id}" onclick="focusField('${id}')">
+      <div class="guide-field-dot ${statusDot[f.status]}"></div>
+      <div class="guide-field-name">${f.label}</div>
+      <span class="guide-field-badge ${badgeCls[f.status]}">${badgeLbl[f.status]}</span>
+    </div>`;
+  }).join('');
+
+  const legend=`
+    <div class="gd-legend">
+      <div class="gd-legend-item"><div class="guide-field-dot dot-auto"></div>Auto-populates correctly</div>
+      <div class="gd-legend-item"><div class="guide-field-dot dot-verify"></div>Verify against source</div>
+      <div class="gd-legend-item"><div class="guide-field-dot dot-manual"></div>Must manually enter</div>
+      <div class="gd-legend-item"><div class="guide-field-dot dot-blank"></div>Leave blank</div>
+    </div>`;
+
+  gb.innerHTML=`<div class="guide-checklist">
+    <div class="guide-sec-badge">${sec.title} — Click any field for guidance</div>
+    ${rows}
+    <div style="margin-top:12px;">${legend}</div>
+  </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// GUIDE PANEL: active field detail
+// ══════════════════════════════════════════════════════════════════
+function renderGuideDetail(fid){
+  const f=F[fid];
+  if(!f)return;
+  const gb=document.getElementById('guideBody');
+
+  const sc={auto:'gd-sc-auto',verify:'gd-sc-verify',manual:'gd-sc-manual',blank:'gd-sc-blank'}[f.status];
+  const sl={auto:'Auto-Populates',verify:'Verify Against Source',manual:'Must Manually Enter',blank:'Leave Blank'}[f.status];
+
+  const warnHTML=f.warning?`
+    <div class="gd-section-label">⚠️ Warning</div>
+    <div class="gd-warning">⚠️ ${f.warning}</div>`:'';
+
+  const tipLines = f.tip.split('\n').map(l=>l.trim()).filter(Boolean).join('<br>');
+
+  gb.innerHTML=`
+    <div class="gd-back" onclick="showIdle()">← Back to section checklist</div>
+    <div class="gd-status-bar">
+      <div class="gd-status-chip ${sc}">${sl}</div>
+      <div class="gd-fieldname">${f.label}</div>
+    </div>
+    <div class="gd-content">
+      <div class="gd-section-label">What to enter</div>
+      <div class="gd-tip">${tipLines}</div>
+      <div class="gd-section-label">Source</div>
+      <div class="gd-source">📌 ${f.source}</div>
+      ${warnHTML}
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// FIELD FOCUS
+// ══════════════════════════════════════════════════════════════════
+function focusField(fid){
+  // De-highlight old
+  if(activeField){
+    const old=document.getElementById(`vf_${activeField}`);
+    if(old) old.classList.remove('active');
+    const oldRow=document.querySelector(`.guide-field-row[data-fid="${activeField}"]`);
+    if(oldRow) oldRow.classList.remove('active');
+  }
+  activeField=fid;
+  // Highlight new
+  const vf=document.getElementById(`vf_${fid}`);
+  if(vf) vf.classList.add('active');
+  renderGuideDetail(fid);
+}
+
+function showIdle(){
+  activeField=null;
+  if(currentSec){
+    const sec=SECTIONS.find(s=>s.id===currentSec);
+    // remove active highlight
+    document.querySelectorAll('.vf.active').forEach(el=>el.classList.remove('active'));
+    renderGuideIdle(sec);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// INTERACTIONS
+// ══════════════════════════════════════════════════════════════════
+function navigate(id){
+  activeField=null;
+  currentSec=id;
+  buildNav();
+  const sec=SECTIONS.find(s=>s.id===id);
+  renderPortal(sec);
+  renderGuideIdle(sec);
+  document.getElementById('portalCol').scrollTop=0;
+
+  // Wire up click events on portal fields AFTER render
+  setTimeout(()=>{
+    document.querySelectorAll('[data-fid]').forEach(el=>{
+      el.addEventListener('click',e=>{
+        const fid=el.getAttribute('data-fid')||el.closest('[data-fid]')?.getAttribute('data-fid');
+        if(fid) focusField(fid);
+      });
+      el.addEventListener('focus',e=>{
+        const fid=el.getAttribute('data-fid');
+        if(fid) focusField(fid);
+      });
     });
+    document.querySelectorAll('.vf-label[data-fid]').forEach(el=>{
+      el.addEventListener('click',e=>{
+        const fid=el.getAttribute('data-fid');
+        if(fid) focusField(fid);
+      });
+    });
+  },50);
+}
+
+function toggleDone(id){
+  if(completed.has(id)) completed.delete(id);
+  else completed.add(id);
+  save(); buildNav(); updateProgress();
+  const btn=document.getElementById('markBtn');
+  if(btn){
+    const done=completed.has(id);
+    btn.className=`mark-btn ${done?'done':'todo'}`;
+    btn.textContent=done?'✓ Section Complete':'✓ Mark Section Complete';
   }
+}
 
-  // ─── PROGRESS ────────────────────────────────────────────────────────────────
-
-  function updateProgress() {
-    const total = sections.length;
-    const done = completedSet.size;
-    const pct = Math.round((done / total) * 100);
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressText').textContent = `${done} / ${total} sections`;
+function toggleFinal(secId,idx){
+  const key=`${secId}-${idx}`;
+  if(finalDone.has(key)) finalDone.delete(key);
+  else finalDone.add(key);
+  save();
+  const row=document.getElementById(`fsr_${idx}`);
+  if(row){
+    const chk=finalDone.has(key);
+    row.className=`final-step-row${chk?' done':''}`;
+    row.querySelector('input').checked=chk;
   }
+}
 
-  // ─── MAIN RENDER ─────────────────────────────────────────────────────────────
-
-  function renderSection(id) {
-    const s = sections.find(x => x.id === id);
-    if (!s) return;
-    const main = document.getElementById('main');
-
-    const riskClass = s.risk;
-    const riskIcon = s.risk === 'high' ? '🔴' : s.risk === 'med' ? '🟡' : '🟢';
-    const riskTitle = s.risk === 'high' ? 'High Hold Risk' : s.risk === 'med' ? 'Medium Hold Risk' : 'Low Hold Risk';
-
-    const done = completedSet.has(id);
-    const idx = sections.findIndex(x => x.id === id);
-    const nextSection = sections[idx + 1];
-
-    let contentHTML = '';
-
-    if (s.finalSteps) {
-      contentHTML = s.finalSteps.map((step, i) => {
-        const key = `${id}-${i}`;
-        const checked = finalChecked.has(key);
-        return `
-          <div class="final-step ${checked ? 'done' : ''}" id="fs-${i}" onclick="toggleFinal('${id}', ${i})">
-            <input type="checkbox" ${checked ? 'checked' : ''} onclick="event.stopPropagation(); toggleFinal('${id}', ${i})">
-            <div>
-              <div class="fs-label">${step.label}</div>
-              <div class="fs-note">${step.note}</div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    } else {
-      const fieldCards = s.fields.map(f => {
-        const wideClass = f.wide ? 'wide' : '';
-        const badgeLabel = f.status === 'auto' ? 'Auto-Pop' : f.status === 'verify' ? 'Verify' : f.status === 'manual' ? 'Must Enter' : 'Leave Blank';
-        return `
-          <div class="fc ${f.status} ${wideClass}">
-            <div class="fc-top">
-              <div class="fc-name">${f.name}</div>
-              <span class="fc-badge badge-${f.status}">${badgeLabel}</span>
-            </div>
-            <div class="fc-tip">${f.tip}</div>
-            <div class="fc-source">📌 ${f.source}</div>
-          </div>
-        `;
-      }).join('');
-
-      const subnoteHTML = s.subnote ? `
-        <div class="subnote">
-          <strong>${s.subnote.title}</strong>
-          <ul>${s.subnote.items.map(i => `<li>${i}</li>`).join('')}</ul>
-        </div>
-      ` : '';
-
-      contentHTML = `<div class="fields-grid">${fieldCards}${subnoteHTML}</div>`;
-    }
-
-    main.innerHTML = `
-      <div class="sec-title">${s.icon} ${s.title}</div>
-      <div class="sec-subtitle">Complete all fields in this section, then mark it done and proceed to the next.</div>
-
-      <div class="legend">
-        <span class="legend-item"><span class="l-dot l-auto"></span>Auto-populates correctly</span>
-        <span class="legend-item"><span class="l-dot l-verify"></span>Verify against source</span>
-        <span class="legend-item"><span class="l-dot l-manual"></span>Must manually enter</span>
-        <span class="legend-item"><span class="l-dot l-blank"></span>Leave blank</span>
-      </div>
-
-      <div class="hold-banner ${riskClass}">
-        <div class="hold-icon">${riskIcon}</div>
-        <div class="hold-body">
-          <div class="hold-title">${riskTitle}</div>
-          <div class="hold-text">${s.riskTip}</div>
-        </div>
-      </div>
-
-      ${contentHTML}
-
-      <button class="complete-btn ${done ? 'complete' : 'incomplete'}" id="completeBtn" onclick="toggleComplete('${id}')">
-        ${done ? '✓ Section Complete' : '✓ Mark as Complete'}
-      </button>
-      ${nextSection ? `<button class="next-btn" onclick="navigate('${nextSection.id}')">Next: ${nextSection.title} →</button>` : ''}
-    `;
-  }
-
-  // ─── INTERACTIONS ─────────────────────────────────────────────────────────────
-
-  function navigate(id) {
-    currentId = id;
-    buildSidebar();
-    renderSection(id);
-    document.getElementById('main').scrollTop = 0;
-  }
-
-  function toggleComplete(id) {
-    if (completedSet.has(id)) {
-      completedSet.delete(id);
-    } else {
-      completedSet.add(id);
-    }
-    saveState();
-    buildSidebar();
-    updateProgress();
-    const done = completedSet.has(id);
-    const btn = document.getElementById('completeBtn');
-    if (btn) {
-      btn.className = `complete-btn ${done ? 'complete' : 'incomplete'}`;
-      btn.textContent = done ? '✓ Section Complete' : '✓ Mark as Complete';
-    }
-  }
-
-  function toggleFinal(sectionId, idx) {
-    const key = `${sectionId}-${idx}`;
-    if (finalChecked.has(key)) {
-      finalChecked.delete(key);
-    } else {
-      finalChecked.add(key);
-    }
-    saveState();
-    const el = document.getElementById(`fs-${idx}`);
-    if (el) {
-      const checked = finalChecked.has(key);
-      el.className = `final-step ${checked ? 'done' : ''}`;
-      el.querySelector('input').checked = checked;
-      el.querySelector('.fs-label').style.textDecoration = checked ? 'line-through' : '';
-    }
-  }
-
-  // ─── INIT ─────────────────────────────────────────────────────────────────────
-
-  buildSidebar();
-  renderSection(currentId);
-  updateProgress();
+// ══════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════
+buildNav();
+navigate(SECTIONS[0].id);
+updateProgress();
 </script>
 </body>
 </html>
