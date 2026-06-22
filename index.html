@@ -3,922 +3,1173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CO VITU — In-State Registration Guide</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <title>CO In-State Registration — VITU Guide</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --blue:      #1565c0;
-      --blue-dark: #0d2a6e;
-      --req:       #e53935;
-      --bg:        #edf0f5;
-      --border:    #cdd3dc;
-      --text:      #1e293b;
-      --muted:     #64748b;
-    }
-
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: Arial, 'Helvetica Neue', sans-serif;
       font-size: 13px;
-      line-height: 1.4;
+      color: #333;
+      background: #0b7d92;
     }
 
-    /* ─── sticky header ─── */
-    .page-header {
-      background: var(--blue-dark);
-      color: #fff;
-      padding: 10px 16px;
+    /* ── VITU NAV ── */
+    .nav {
+      background: #0c2f3e;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
       position: sticky;
       top: 0;
-      z-index: 200;
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
+      z-index: 300;
+      gap: 0;
     }
-    .page-header h1  { font-size: 14px; font-weight: 700; }
-    .page-header sub { font-size: 11px; opacity: .72; font-weight: 400; }
-
-    /* ─── legend ─── */
-    .legend {
-      background: #fff;
-      border-bottom: 2px solid var(--border);
-      padding: 5px 14px;
+    .nav-logo {
+      color: white;
+      font-size: 26px;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -1.5px;
+      margin-right: 4px;
+    }
+    .nav-tab {
+      color: rgba(255,255,255,.55);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 0 16px;
+      height: 46px;
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
       align-items: center;
+      border-bottom: 3px solid transparent;
+      cursor: default;
+      letter-spacing: .2px;
+    }
+    .nav-tab.on { color: #fff; border-bottom-color: #2de0f5; }
+    .nav-r {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: rgba(255,255,255,.65);
+      font-size: 12px;
+    }
+    .nav-bell {
+      position: relative;
+    }
+    .nav-badge {
+      background: #e53935;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 8px;
+      position: absolute;
+      top: -6px;
+      right: -8px;
+    }
+
+    /* ── GUIDE HINT STRIP ── */
+    .hint {
+      background: #fffde7;
+      border-bottom: 1px solid #f0cc5a;
+      padding: 5px 20px;
+      font-size: 11.5px;
+      color: #5d4037;
+      text-align: center;
       position: sticky;
-      top: 40px;
-      z-index: 199;
+      top: 46px;
+      z-index: 299;
     }
-    .leg-lbl  { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .3px; margin-right: 2px; }
-    .leg-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
 
-    /* ─── chips ─── */
-    .chip {
-      display: inline-flex; align-items: center;
-      font-size: 9px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
-      padding: 1px 5px; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+    /* ── PAGE LAYOUT ── */
+    .page { display: flex; min-height: 100vh; }
+    .sidebar { width: 130px; flex-shrink: 0; background: #0b7d92; }
+    .content {
+      flex: 1;
+      background: white;
+      padding: 0 40px 80px;
+      min-height: 100vh;
     }
-    .chip.auto   { background: #dcfce7; color: #15803d; }
-    .chip.verify { background: #dbeafe; color: #1e40af; }
-    .chip.manual { background: #fef3c7; color: #92400e; }
-    .chip.blank  { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
-    .chip.cond   { background: #ede9fe; color: #6d28d9; }
-    .chip.action { background: #fee2e2; color: #991b1b; }
 
-    /* ─── sections ─── */
-    .section {
-      margin: 10px;
-      background: #fff;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,.07);
-    }
-    .sec-hdr {
-      background: var(--blue-dark);
-      color: #fff;
-      padding: 8px 14px;
+    /* ── VIN HEADING ── */
+    .vin-row {
+      padding: 22px 0 14px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      gap: 12px;
+      border-bottom: 1px solid #e8e8e8;
+      margin-bottom: 28px;
     }
-    .sec-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; }
-    .risk { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
-    .risk.hi  { background: #fecaca; color: #7f1d1d; }
-    .risk.med { background: #fde68a; color: #78350f; }
-    .risk.fin { background: #bfdbfe; color: #1e3a8a; }
-
-    .sec-body { padding: 12px 14px; }
-
-    /* ─── callouts ─── */
-    .note {
-      border-radius: 4px; padding: 6px 10px; margin-bottom: 10px;
-      font-size: 11px; border-left: 3px solid;
+    .vin-row h1 {
+      font-size: 21px;
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: .5px;
     }
-    .note.info { background: #eff6ff; border-color: #3b82f6; color: #1e40af; }
-    .note.warn { background: #fff7ed; border-color: #f97316; color: #9a3412; }
+    .mark-sold {
+      background: #00bcd4;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 3px;
+      cursor: default;
+    }
 
-    /* ─── VIN decode button replica ─── */
-    .vin-bar {
-      background: #e8f4fd; border: 1px solid #90caf9;
-      border-radius: 4px; padding: 7px 10px; margin-bottom: 12px;
+    /* ── SECTION ── */
+    .sec { margin-bottom: 36px; }
+
+    .sec-hdr {
+      font-size: 13.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      letter-spacing: .25px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .green-btn {
+      background: #388e3c;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 11px;
+      border-radius: 3px;
+      cursor: default;
+      text-transform: none;
+      letter-spacing: 0;
+      font-style: normal;
+    }
+
+    /* ── SUB-SECTION HEADINGS (teal italic, matching VITU) ── */
+    .sub {
+      font-size: 14px;
+      font-style: italic;
+      color: #00838f;
+      font-weight: 400;
+      margin: 20px 0 12px;
+    }
+    .sub:first-child { margin-top: 6px; }
+
+    /* ── FIELD ROWS ── */
+    .fr {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .fr:last-child { margin-bottom: 0; }
+
+    .f { min-width: 60px; }
+    .f.w1  { flex: 1; }
+    .f.w2  { flex: 2; }
+    .f.w3  { flex: 3; }
+    .f.w4  { flex: 4; }
+    .f.w5  { flex: 5; }
+    .f.wfl { flex: 1 1 100%; }
+
+    /* ── FIELD LABEL ── */
+    .fl {
+      display: block;
+      font-size: 12.5px;
+      color: #555;
+      margin-bottom: 5px;
+    }
+    .fl .r { color: #c62828; }
+
+    /* ── INPUT BOXES (static, visual replicas) ── */
+    .fi {
+      height: 34px;
+      width: 100%;
+      background: #fff;
+      border: 1px solid #c8c8c8;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 13px;
+      color: #555;
+      position: relative;
+      user-select: none;
+    }
+    .fi:hover { border-color: #999; }
+    .fi.open  { border-color: #555; background: #fafafa; }
+
+    /* dropdown arrow */
+    .arr {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 28px;
+      display: flex; align-items: center; justify-content: center;
+      border-left: 1px solid #c8c8c8;
+      color: #999;
+      font-size: 10px;
+    }
+
+    /* calendar icon */
+    .cal {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 34px;
+      display: flex; align-items: center; justify-content: center;
+      border-left: 1px solid #c8c8c8;
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* currency $ prefix */
+    .pfx {
+      background: #f0f0f0;
+      border-right: 1px solid #c8c8c8;
+      height: 100%;
+      display: flex; align-items: center;
+      padding: 0 8px;
+      margin: 0 8px 0 -8px;
+      color: #555;
+    }
+
+    /* ── RADIO GROUPS ── */
+    .fir {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 4px 0;
+      cursor: pointer;
+    }
+    .fir:hover { opacity: .85; }
+    .fir.open {}
+
+    .ro {
+      display: flex; align-items: center; gap: 5px;
+      color: #444; font-size: 13px;
+    }
+    .rb {
+      width: 16px; height: 16px;
+      border: 2px solid #b0b0b0;
+      border-radius: 50%;
+      background: white;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .rb.on { border-color: #00bcd4; }
+    .rb.on::after {
+      content: '';
+      width: 8px; height: 8px;
+      background: #00bcd4;
+      border-radius: 50%;
+    }
+
+    /* ── CHECKBOX ── */
+    .fic {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 4px 0; cursor: pointer; color: #555; font-size: 13px;
+    }
+    .fic:hover { opacity: .85; }
+    .cbx {
+      width: 14px; height: 14px;
+      border: 2px solid #aaa;
+      background: white; flex-shrink: 0;
+    }
+
+    /* ── GUIDANCE NOTES ── */
+    .fn {
+      display: none;
+      background: #f7f8fa;
+      border: 1px solid #dde2ea;
+      border-left: 3px solid #607d8b;
+      margin-top: 4px;
+      padding: 8px 11px;
+      font-size: 12.5px;
+      color: #222;
+      line-height: 1.55;
+    }
+    .fn.show { display: block; }
+    .fn strong { font-weight: 700; }
+    .fn .src {
+      display: block; margin-top: 5px;
+      font-size: 11px; color: #777;
+    }
+    .fn .warn {
+      display: block; margin-top: 5px;
+      font-size: 12px; color: #b71c1c; font-weight: 600;
+    }
+
+    /* ── ALWAYS-VISIBLE CALLOUT ── */
+    .callout {
+      background: #f7f8fa;
+      border: 1px solid #dde2ea;
+      border-left: 3px solid #607d8b;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #222;
+      line-height: 1.65;
+    }
+
+    /* ── SECTION CONTEXT NOTE (small italic below sec-hdr) ── */
+    .sec-note {
+      font-size: 12px; color: #888; margin: -10px 0 14px;
+      font-style: italic;
+    }
+
+    /* ── LINK STYLE (Add Secondary Lienholder) ── */
+    .add-lnk {
+      color: #00838f; font-size: 13px; cursor: default;
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 10px;
+    }
+
+    /* ── INFO ICON ── */
+    .iico {
+      width: 16px; height: 16px; background: #9e9e9e;
+      border-radius: 50%; color: white; font-size: 10px;
+      font-weight: 700; display: inline-flex;
+      align-items: center; justify-content: center;
+    }
+
+    /* ── FINAL STEPS ── */
+    .final-list { display: flex; flex-direction: column; gap: 6px; }
+    label.fstep {
       display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border: 1px solid #e0e0e0;
+      cursor: pointer; user-select: none; font-size: 13px; color: #333;
     }
-    .vin-btn  { background: #2e7d32; color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 4px; cursor: default; }
-    .vin-note { font-size: 11px; color: #1565c0; }
+    label.fstep:hover { background: #f9f9f9; }
+    label.fstep.done { background: #f1f8e9; border-color: #a5d6a7; }
+    label.fstep input { width: 14px; height: 14px; accent-color: #388e3c; cursor: pointer; flex-shrink: 0; }
+    .fstep-sub { font-size: 11px; color: #888; margin-left: 2px; }
 
-    /* ─── summary bar replica ─── */
-    .sumbar {
-      background: #cce5ff; border: 1px solid #90caf9;
-      border-radius: 4px; padding: 6px 10px; margin: 4px 0 12px;
-      display: flex; gap: 20px; flex-wrap: wrap;
-    }
-    .sb-item { display: flex; flex-direction: column; }
-    .sb-lbl  { font-size: 9px; font-weight: 700; color: #004085; text-transform: uppercase; letter-spacing: .4px; }
-    .sb-val  { font-size: 11px; color: #004085; }
-
-    /* ─── field grid ─── */
-    .frow { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
-    .frow:last-child { margin-bottom: 0; }
-    .f { display: flex; flex-direction: column; gap: 3px; min-width: 90px; }
-    .f.w1   { flex: 1; }
-    .f.w2   { flex: 2; }
-    .f.w3   { flex: 3; }
-    .f.w4   { flex: 4; }
-    .f.wful { flex: 1 1 100%; }
-
-    /* ─── VITU-style label ─── */
-    .lbl { font-size: 11px; font-weight: 600; color: var(--blue); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .lbl .r { color: var(--req); margin-left: 1px; }
-
-    /* ─── guidance box (mimics VITU input — shows instructions instead) ─── */
-    .g {
-      border-radius: 3px; padding: 4px 7px; min-height: 30px;
-      display: flex; gap: 5px; align-items: flex-start;
-      border: 1.5px solid;
-    }
-    .g.auto   { background: #f0fdf4; border-color: #86efac; }
-    .g.verify { background: #eff6ff; border-color: #93c5fd; }
-    .g.manual { background: #fffbeb; border-color: #fcd34d; }
-    .g.blank  { background: #f8fafc; border-color: #cbd5e1; }
-    .g.cond   { background: #faf5ff; border-color: #c4b5fd; }
-    .g.action { background: #fff1f2; border-color: #fca5a5; }
-
-    .gt { flex: 1; font-size: 11.5px; line-height: 1.35; padding-top: 1px; }
-    .gt strong { font-weight: 700; }
-    .gs { font-size: 10px; color: var(--muted); font-style: italic; margin-top: 2px; display: block; }
-
-    /* ─── body style code chips ─── */
-    .codes { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
-    .cc { background: #dbeafe; border: 1px solid #bfdbfe; border-radius: 3px; padding: 1px 5px; font-size: 9.5px; color: #1e40af; }
-    .cc strong { font-weight: 700; }
-
-    /* ─── sub-section label ─── */
-    .sub { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin: 10px 0 6px; padding-bottom: 4px; border-bottom: 1px solid #e2e8f0; }
-    .sub:first-child { margin-top: 0; }
-
-    /* ─── fee table ─── */
-    .ftbl { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
-    .ftbl th { background: #1a237e; color: #fff; padding: 6px 10px; text-align: left; font-weight: 600; font-size: 11px; }
-    .ftbl td { padding: 5px 10px; border-bottom: 1px solid #e2e8f0; }
-    .ftbl tr:last-child td { border-bottom: none; }
-    .pill { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; }
-    .paid  { background: #dcfce7; color: #15803d; }
-    .never { background: #fef3c7; color: #92400e; }
-
-    /* ─── final steps ─── */
-    .steps { display: flex; flex-direction: column; gap: 6px; }
-    label.step {
-      display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px;
-      border-radius: 4px; border: 1.5px solid #e2e8f0;
-      cursor: pointer; user-select: none; transition: background .12s, border-color .12s;
-    }
-    label.step:hover { background: #f8fafc; }
-    label.step.done  { background: #f0fdf4; border-color: #86efac; }
-    label.step input { width: 15px; height: 15px; margin-top: 1px; cursor: pointer; accent-color: #16a34a; flex-shrink: 0; }
-    .st-body  { flex: 1; }
-    .st-title { font-size: 13px; font-weight: 600; color: var(--text); }
-    .st-note  { font-size: 11px; color: var(--muted); margin-top: 1px; }
-
-    .spacer { height: 48px; }
-
-    @media (max-width: 500px) {
-      .f { flex: 1 1 100% !important; }
+    @media (max-width: 760px) {
+      .sidebar { display: none; }
+      .content { padding: 0 16px 60px; }
+      .f { flex: 1 1 calc(50% - 7px) !important; }
     }
   </style>
 </head>
 <body>
 
-<header class="page-header">
-  <h1>CO VITU &mdash; In-State Registration Guide</h1>
-  <sub>Colorado In-State Title &amp; Registration &nbsp;&middot;&nbsp; Use alongside the VITU portal</sub>
-</header>
-
-<div class="legend">
-  <span class="leg-lbl">Key:</span>
-  <span class="leg-item"><span class="chip auto">AUTO</span> Auto-populates, verify</span>
-  <span class="leg-item"><span class="chip verify">VERIFY</span> Auto &mdash; must double-check</span>
-  <span class="leg-item"><span class="chip manual">MANUAL</span> Enter manually</span>
-  <span class="leg-item"><span class="chip blank">BLANK</span> Leave blank</span>
-  <span class="leg-item"><span class="chip cond">COND.</span> Conditional &mdash; see note</span>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     1 · TRANSACTION INFORMATION
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">1 &nbsp;&middot;&nbsp; Transaction Information</span></div>
-  <div class="sec-body">
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Location <span class="r">*</span></div>
-        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Defaulted &mdash; confirm it is the correct location</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Titling State <span class="r">*</span></div>
-        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Must be <strong>CO</strong></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Acquisition Type <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>Colorado Dealer</strong></span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Transaction <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>Title Only</strong></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Transaction Type <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>New Ownership</strong></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Is Vehicle Delivered? <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Check Carma &mdash; mark <strong>Yes</strong> or <strong>No</strong><span class="gs">Source: Carma</span></span></div>
-      </div>
-    </div>
+<!-- ── VITU NAV ── -->
+<nav class="nav">
+  <span class="nav-logo">vitu</span>
+  <span class="nav-tab on">Retail</span>
+  <span class="nav-tab">Interstate</span>
+  <div class="nav-r">
+    <span>&#128269;</span>
+    <span class="nav-bell">&#128276;<span class="nav-badge">6671</span></span>
+    <span>&#10067;</span>
+    <span>&#9679; Connor Fernandez &#9660;</span>
   </div>
-</div>
+</nav>
 
+<div class="hint">&#128203; <strong>CO In-State Registration Guide</strong> &nbsp;&mdash;&nbsp; Click any field to see what to enter</div>
 
-<!-- ════════════════════════════════════════════
-     2 · VEHICLE INFORMATION
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr">
-    <span class="sec-title">2 &nbsp;&middot;&nbsp; Vehicle Information</span>
-    <span class="risk hi">&#9888; High Risk</span>
-  </div>
-  <div class="sec-body">
+<div class="page">
+  <div class="sidebar"></div>
+  <div class="content">
 
-    <div class="vin-bar">
-      <span class="vin-btn">Populate from VIN Decode</span>
-      <span class="vin-note">Enter VIN first &mdash; then click to auto-populate fields below</span>
+    <!-- VIN heading area -->
+    <div class="vin-row">
+      <h1>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</h1>
+      <span class="mark-sold">Mark as Sold</span>
     </div>
 
-    <div class="frow">
-      <div class="f w3">
-        <div class="lbl">VIN <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Enter VIN from title or bill of sale</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Stock Number</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Enter stock number<span class="gs">Source: Carma</span></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Vehicle Sold As <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Used</strong></span></div>
-      </div>
-    </div>
 
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Special Purchase Type</div>
-        <div class="g blank"><span class="chip blank">BLANK</span><span class="gt">Always leave blank</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Vehicle Type <span class="r">*</span></div>
-        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto-populates &mdash; confirm it is correct</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Vehicle Class <span class="r">*</span></div>
-        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto-populates &mdash; confirm it is correct</span></div>
-      </div>
-    </div>
+    <!-- ══════════════════════════════════════════
+         TRANSACTION INFO
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Transaction Info</div>
 
-    <div class="frow">
-      <div class="f w1">
-        <div class="lbl">Year <span class="r">*</span></div>
-        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto &mdash; confirm correct</span></div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Location <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Defaulted to your location. Confirm it is the correct Carvana location before proceeding.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Titling State</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Must be set to <strong>CO</strong>. Verify before proceeding.</div>
+        </div>
       </div>
-      <div class="f w2">
-        <div class="lbl">Make <span class="r">*</span></div>
-        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto &mdash; full make name (e.g. MAZDA)</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Model <span class="r">*</span></div>
-        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto &mdash; shortened model name</span></div>
-      </div>
-    </div>
 
-    <div class="frow">
-      <div class="f wful">
-        <div class="lbl">Style <span class="r">*</span></div>
-        <div class="g verify">
-          <span class="chip verify">VERIFY</span>
-          <span class="gt">Auto-populates &mdash; double-check body style code is correct
-            <div class="codes">
-              <span class="cc"><strong>CP</strong> Coupe</span>
-              <span class="cc"><strong>CV</strong> Convertible</span>
-              <span class="cc"><strong>SD</strong> Sedan</span>
-              <span class="cc"><strong>UP</strong> SUV</span>
-              <span class="cc"><strong>PV</strong> Passenger Van</span>
-              <span class="cc"><strong>SW</strong> Station Wagon</span>
-              <span class="cc"><strong>PK</strong> Pickup</span>
-            </div>
-          </span>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Acquisition Type <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Always select: <strong>Colorado Dealer</strong></div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Transaction <span class="r">*</span></span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb"></span> Title and Registration</span>
+            <span class="ro"><span class="rb on"></span> Title Only</span>
+          </div>
+          <div class="fn">Always select: <strong>Title Only</strong></div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Transaction Type <span class="r">*</span></span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb on"></span> New Ownership</span>
+            <span class="ro"><span class="rb"></span> New Vehicle</span>
+          </div>
+          <div class="fn">Always select: <strong>New Ownership</strong></div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Is Vehicle Delivered</span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb"></span> Yes</span>
+            <span class="ro"><span class="rb on"></span> No</span>
+          </div>
+          <div class="fn">Check Carma to confirm whether the vehicle was delivered to the customer. Select <strong>Yes</strong> or <strong>No</strong> accordingly.<span class="src">Source: Carma</span></div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Sale Type</span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb on"></span> Purchase</span>
+            <span class="ro"><span class="rb"></span> Lease</span>
+          </div>
+          <div class="fn">Defaults to <strong>Purchase</strong>. Do not change.</div>
         </div>
       </div>
     </div>
 
-    <div class="sumbar">
-      <div class="sb-item"><span class="sb-lbl">Make / Model / Year</span><span class="sb-val">Auto-populated after VIN decode</span></div>
-      <div class="sb-item"><span class="sb-lbl">Style</span><span class="sb-val">Auto-populated</span></div>
-      <div class="sb-item"><span class="sb-lbl">Fuel Type</span><span class="sb-val">Auto-populated</span></div>
-      <div class="sb-item"><span class="sb-lbl">Unladen / Gross Weight</span><span class="sb-val">Auto-populated</span></div>
-    </div>
 
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Color <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match across all paperwork</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Unladen Weight</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">From MT or AR title. <strong>If AZ title &mdash; leave as is.</strong><span class="gs">Source: Out-of-state title</span></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Fuel Type <span class="r">*</span></div>
-        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto &mdash; if wrong, check Carma vehicle details<span class="gs">Source: Carma (if correction needed)</span></span></div>
-      </div>
-    </div>
+    <!-- ══════════════════════════════════════════
+         VEHICLE INFO
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Vehicle Info <span class="green-btn">Populate from VIN decode</span></div>
 
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Override Fuel Type</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Only check if fuel type populated incorrectly</span></div>
+      <div class="fr">
+        <div class="f w3">
+          <span class="fl">VIN <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the full 17-character VIN. After entering, click <strong>Populate from VIN decode</strong> above to auto-fill all vehicle fields below.<span class="src">Source: Title or bill of sale</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Stock #</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the vehicle stock number.<span class="src">Source: Carma</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Vehicle Sold As <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Always select: <strong>Used</strong></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Special Purchase Type</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Always leave <strong>blank</strong>. Do not select anything here.</div>
+        </div>
       </div>
-      <div class="f w2">
-        <div class="lbl">Plug In <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>No</strong> &mdash; unless electric or specific plug-in hybrid</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Override Plug In</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Always <strong>No</strong> &mdash; unless an error appears when Get Fees is clicked</span></div>
-      </div>
-    </div>
 
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Non-Fleet Unit Number</div>
-        <div class="g blank"><span class="chip blank">BLANK</span><span class="gt">Always leave blank</span></div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Vehicle Type <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Auto-populates from VIN decode. Confirm it is correct.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Vehicle Class <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Auto-populates from VIN decode. Confirm it is correct.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Year <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Auto-populates from VIN decode. Confirm it matches the vehicle.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Make <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Auto-populates with the full make name (e.g. TOYOTA, MAZDA). Confirm it is correct.</div>
+        </div>
       </div>
-      <div class="f w2">
-        <div class="lbl">Odometer Validity <span class="r">*</span></div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Defaults to <strong>Actual Mileage</strong></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Odometer Reading <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match bill of sale<span class="gs">Source: Bill of Sale</span></span></div>
-      </div>
-    </div>
 
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Odometer Unit <span class="r">*</span></div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Defaults to <strong>Actual Miles</strong></span></div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Model <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Auto-populates with the shortened model name (e.g. TACOMA, CX-5). Confirm it is correct.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Style <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Auto-populates. Double-check the body style code is correct:
+            <br><strong>CP</strong> = Coupe &nbsp; <strong>CV</strong> = Convertible &nbsp; <strong>SD</strong> = Sedan
+            <br><strong>UP</strong> = SUV &nbsp; <strong>PV</strong> = Passenger Van &nbsp; <strong>SW</strong> = Station Wagon &nbsp; <strong>PK</strong> = Pickup</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Color <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Must match the vehicle color listed consistently across all paperwork.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Unladen Weight <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Pull the unladen weight from the Montana or Arkansas title. <strong>If the title is from Arizona, leave this as is.</strong><span class="src">Source: Out-of-state title</span></div>
+        </div>
       </div>
-    </div>
 
-  </div>
-</div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Fuel Type</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Auto-populates. If the value is wrong, check vehicle details in Carma and correct it.<span class="src">Source: Carma (if correction needed)</span></div>
+        </div>
+        <div class="f w4" style="display:flex;align-items:flex-end;padding-bottom:3px">
+          <div class="fic" onclick="tog(this,event)">
+            <span class="cbx"></span>
+            <span>Override Fuel Type</span>
+          </div>
+          <div class="fn">Only check this if the fuel type auto-populated incorrectly and you need to enter it manually.</div>
+        </div>
+      </div>
 
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Plugin</span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb"></span> Yes</span>
+            <span class="ro"><span class="rb on"></span> No</span>
+          </div>
+          <div class="fn">Always select <strong>No</strong>. Only select Yes for a fully electric vehicle or a specific plug-in hybrid.</div>
+        </div>
+      </div>
 
-<!-- ════════════════════════════════════════════
-     3 · OWNER INFO
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">3 &nbsp;&middot;&nbsp; Owner Info</span></div>
-  <div class="sec-body">
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Primary Owner <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Individual</strong></span></div>
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Override Plugin</span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb"></span> Yes</span>
+            <span class="ro"><span class="rb on"></span> No</span>
+          </div>
+          <div class="fn">Always select <strong>No</strong>. Only select Yes if an error message appears after clicking Get Fees.</div>
+        </div>
       </div>
-    </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Last Name <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL<span class="gs">Source: Driver's License</span></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">First Name <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL<span class="gs">Source: Driver's License</span></span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">Middle Name</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">Suffix</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL (Jr., Sr., etc.)</span></div>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-<!-- ════════════════════════════════════════════
-     4 · PROOF OF IDENTIFICATION
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">4 &nbsp;&middot;&nbsp; Proof of Identification</span></div>
-  <div class="sec-body">
-    <div class="frow">
-      <div class="f w3">
-        <div class="lbl">Proof of Identification <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Select whichever document type applies</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Document Number <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">The ID or document number<span class="gs">Source: DL / ID card</span></span></div>
-      </div>
-    </div>
-    <div class="note info">&#9888;&#65039; Fields below only appear when <strong>Out-of-State Driver's License</strong> is selected as proof of ID.</div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Document First Name</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; as shown on document</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Document Last Name</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; as shown on document</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Document Middle Name</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; as shown on document</span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Expiry Date</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; expiry date from document</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Date of Birth</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; DOB from document</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     5 · RESIDENCE ADDRESS
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">5 &nbsp;&middot;&nbsp; Residence Address</span></div>
-  <div class="sec-body">
-    <div class="note info">&#128203; Use the <strong>registration address</strong> from Carma</div>
-    <div class="frow">
-      <div class="f w1">
-        <div class="lbl">Street Number <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Number only (e.g. 123)<span class="gs">Source: Carma</span></span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">House Suffix</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">1/2, 1/4, .5 &mdash; if applicable</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">Direction Prefix</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">N, E, S, W &mdash; if applicable</span></div>
-      </div>
-      <div class="f w3">
-        <div class="lbl">Street Name <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Name only &mdash; no number or type</span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Street Type <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Dr, St, Ave, Blvd, Rd, Ln, etc.</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">Direction Postfix</div>
-        <div class="g blank"><span class="chip blank">BLANK</span><span class="gt">Leave blank</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">APT/Unit Type</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Apt, Unit, Suite &mdash; if applicable</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">APT/Unit Number</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Unit # &mdash; if applicable</span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w1">
-        <div class="lbl">Zip Code <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">5-digit ZIP</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">City <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">City name</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">County</div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto-populates from ZIP / City</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">State</div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto: <strong>CO</strong></span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     6 · MAILING ADDRESS
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">6 &nbsp;&middot;&nbsp; Mailing Address</span></div>
-  <div class="sec-body">
-    <div class="note info">&#128203; Only required when <strong>different from residence address</strong> or when using VITU's suggested address. Should also be on the title application (page 1).</div>
-    <div class="frow">
-      <div class="f wful">
-        <div class="lbl">Add Mailing Address</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Check this box only if mailing address differs from residence</span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w1">
-        <div class="lbl">Zip Code</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">5-digit ZIP</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">City</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">City name</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">State</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">State abbrev.</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">Country</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Default: US</span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w4">
-        <div class="lbl">Address Line 1</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Street number, name, and type (e.g. 123 Main St)</span></div>
-      </div>
-      <div class="f w4">
-        <div class="lbl">Address Line 2</div>
-        <div class="g blank"><span class="chip blank">BLANK</span><span class="gt">Never use this field</span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w1">
-        <div class="lbl">APT/Unit Type</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">If applicable</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">APT/Unit Number</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">If applicable</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     7 · SECONDARY OWNER
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">7 &nbsp;&middot;&nbsp; Secondary Owner</span></div>
-  <div class="sec-body">
-    <div class="note info">&#128203; Only applies to co-buyer / 3rd-party finance deals</div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Owner Type <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Individual</strong></span></div>
-      </div>
-      <div class="f w3">
-        <div class="lbl">Do You Want a Joint Tenancy?</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Fill in based on what was checked on the <strong>Joint Tenancy Form</strong><span class="gs">Source: Joint Tenancy Form</span></span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Last Name <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">First Name <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">Middle Name</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As on DL</span></div>
-      </div>
-      <div class="f w1">
-        <div class="lbl">Suffix</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As on DL</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     8 · SECONDARY OWNER — PROOF OF ID
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">8 &nbsp;&middot;&nbsp; Secondary Owner &mdash; Proof of ID</span></div>
-  <div class="sec-body">
-    <div class="frow">
-      <div class="f w3">
-        <div class="lbl">Proof of Identification <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Select whichever document type applies</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Document Number <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">The ID or document number</span></div>
-      </div>
-    </div>
-    <div class="note info">&#9888;&#65039; Fields below only appear when <strong>Out-of-State Driver's License</strong> is selected.</div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Document First Name</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Document Last Name</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Document Middle Name</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Expiry Date</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Date of Birth</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     9 · BUYERS AGENT & SALE INFO
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr">
-    <span class="sec-title">9 &nbsp;&middot;&nbsp; Buyers Agent &amp; Sale Info</span>
-    <span class="risk hi">&#9888; High Risk</span>
-  </div>
-  <div class="sec-body">
-
-    <div class="sub">Buyers Agent</div>
-    <div class="frow">
-      <div class="f w3">
-        <div class="lbl">Add Buyer's Agent SVID</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>No</strong></span></div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Fleet/Non Fleet Unit Number</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Always leave <strong>blank</strong>.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Odometer Validity <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Defaults to <strong>Actual Mileage</strong>. Do not change.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Odometer Reading <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the odometer reading. Must match the bill of sale exactly.<span class="src">Source: Bill of Sale</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Odometer Unit <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Defaults to <strong>Miles</strong>. Do not change.</div>
+        </div>
       </div>
     </div>
 
-    <div class="sub">Sale Info</div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Sale Type <span class="r">*</span></div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Defaults to <strong>Purchase</strong></span></div>
+
+    <!-- ══════════════════════════════════════════
+         OWNER INFO
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Owner Info</div>
+
+      <div class="sub">Primary Owner</div>
+      <div class="fr">
+        <div class="f wfl">
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb on"></span> Individual</span>
+            <span class="ro"><span class="rb"></span> Business</span>
+          </div>
+          <div class="fn">Always select: <strong>Individual</strong></div>
+        </div>
       </div>
-      <div class="f w2">
-        <div class="lbl">Date of Sale <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Date of sale<span class="gs">Source: Carma / RPA</span></span></div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Last Name <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter exactly as it appears on the driver's license.<span class="src">Source: Driver's License</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">First Name <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter exactly as it appears on the driver's license.<span class="src">Source: Driver's License</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Middle Name</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter exactly as it appears on the driver's license. Leave blank if none.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Suffix</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Enter exactly as it appears on the driver's license (Jr., Sr., etc.). Leave blank if none.</div>
+        </div>
+      </div>
+
+      <div class="sub">Proof of Identification</div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Proof of Identification <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Select the type of ID document the customer is providing.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Document Number</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the ID or document number exactly as it appears on the document.<span class="src">Source: DL / ID card</span></div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Expire Date</span>
+          <div class="fi dt" onclick="tog(this,event)"><span class="cal">&#128197;</span></div>
+          <div class="fn">Only required when <strong>Out-of-State Driver's License</strong> is selected as the proof type. Enter the expiry date from the document.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Date of Birth</span>
+          <div class="fi dt" onclick="tog(this,event)"><span class="cal">&#128197;</span></div>
+          <div class="fn">Only required when <strong>Out-of-State Driver's License</strong> is selected. Enter the date of birth from the document.</div>
+        </div>
+      </div>
+
+      <div class="sub">Residence Address</div>
+      <p style="font-size:11.5px;color:#888;margin:-4px 0 12px;font-style:italic">Use the registration address from Carma.</p>
+      <div class="fr">
+        <div class="f w1">
+          <span class="fl">Street Number <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the street number only (e.g. 632).<span class="src">Source: Carma registration address</span></div>
+        </div>
+        <div class="f w1">
+          <span class="fl">House Suffix</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Only if applicable — enter &#189;, &#188;, or .5. Leave blank if not needed.</div>
+        </div>
+        <div class="f w1">
+          <span class="fl">Direction Prefix</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Enter N, E, S, or W if the street address includes a directional prefix. Leave blank if not applicable.</div>
+        </div>
+        <div class="f w3">
+          <span class="fl">Street Name <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the street name only — no number or type (e.g. BRIDGER).</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Street Type</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Select the street type (e.g. DRIVE, STREET, AVE, BLVD, RD, LN).</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Direction Postfix</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Leave <strong>blank</strong>.</div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Apt/Unit Type</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">If applicable, select the unit type (Apt, Unit, Suite). Leave blank if not applicable.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Apt/Unit Number</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">If applicable, enter the unit number. Leave blank if not applicable.</div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w1">
+          <span class="fl">Zip Code <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the 5-digit ZIP code.<span class="src">Source: Carma registration address</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">City <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the city name.<span class="src">Source: Carma registration address</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">County <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Auto-populates from the ZIP code and city entered. Verify it is correct.</div>
+        </div>
+        <div class="f w1">
+          <span class="fl">State <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Auto-populates as <strong>CO</strong>. Do not change.</div>
+        </div>
+      </div>
+
+      <div class="sub">Mailing Address</div>
+      <p style="font-size:11.5px;color:#888;margin:-4px 0 12px;font-style:italic">Only applicable if mailing address differs from residence address, or when using VITU's suggested address. Should also appear on the title application (page 1).</p>
+      <div class="fr">
+        <div class="f wfl">
+          <div class="fic" onclick="tog(this,event)">
+            <span class="cbx"></span>
+            <span>Add Mailing Address</span>
+          </div>
+          <div class="fn">Check this box only if the mailing address is different from the residence address, or when VITU suggests an alternate address.</div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w1">
+          <span class="fl">Zip Code</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the 5-digit ZIP code for the mailing address.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">City</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the city for the mailing address.</div>
+        </div>
+        <div class="f w1">
+          <span class="fl">State</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Enter the state abbreviation.</div>
+        </div>
+        <div class="f w1">
+          <span class="fl">Country</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Default: US.</div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w4">
+          <span class="fl">Address Line 1</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the full street address: number, name, and type (e.g. 123 Main St).</div>
+        </div>
+        <div class="f w4">
+          <span class="fl">Address Line 2</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Always leave <strong>blank</strong>. Never use this field.</div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Apt/Unit Type</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">If applicable, select the unit type.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Apt/Unit Number</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">If applicable, enter the unit number.</div>
+        </div>
       </div>
     </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Gross Sales Price <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match <strong>DR0024</strong><span class="gs">Source: DR0024</span></span></div>
+
+
+    <!-- ══════════════════════════════════════════
+         SECONDARY OWNER
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Secondary Owner</div>
+      <p class="sec-note">Only applicable for co-buyer / 3rd-party finance deals.</p>
+
+      <div class="sub" style="margin-top:0">Secondary Owner</div>
+      <div class="fr">
+        <div class="f wfl">
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb on"></span> Individual</span>
+            <span class="ro"><span class="rb"></span> Business</span>
+          </div>
+          <div class="fn">Always select: <strong>Individual</strong></div>
+        </div>
       </div>
-      <div class="f w2">
-        <div class="lbl">Net Sales Price</div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Updates automatically</span></div>
+      <div class="fr">
+        <div class="f w3">
+          <span class="fl">Do you want a Joint Tenancy?</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Select based on what was checked on the <strong>Joint Tenancy Form</strong>.<span class="src">Source: Joint Tenancy Form</span></div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Last Name <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter exactly as it appears on the driver's license.<span class="src">Source: Driver's License</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">First Name <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter exactly as it appears on the driver's license.<span class="src">Source: Driver's License</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Middle Name</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter exactly as it appears on the driver's license. Leave blank if none.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Suffix</span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">As it appears on the driver's license. Leave blank if none.</div>
+        </div>
+      </div>
+
+      <div class="sub">Proof of Identification</div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Proof of Identification <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Select the type of ID document the co-buyer is providing.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Document Number</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the ID or document number exactly as it appears.<span class="src">Source: DL / ID card</span></div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Expire Date</span>
+          <div class="fi dt" onclick="tog(this,event)"><span class="cal">&#128197;</span></div>
+          <div class="fn">Only required when <strong>Out-of-State Driver's License</strong> is selected.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Date of Birth</span>
+          <div class="fi dt" onclick="tog(this,event)"><span class="cal">&#128197;</span></div>
+          <div class="fn">Only required when <strong>Out-of-State Driver's License</strong> is selected.</div>
+        </div>
       </div>
     </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">MSRP</div>
-        <div class="g action"><span class="chip action">&#9888; ACTION</span><span class="gt"><strong>Come back AFTER clicking Get Fees.</strong> Enter the MSRP value found there &mdash; do not fill in before.</span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Tax Amount Home Rule <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match <strong>Part 3 of DR0024</strong> exactly<span class="gs">Source: DR0024 Part 3</span></span></div>
+
+
+    <!-- ══════════════════════════════════════════
+         BUYER AGENT
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Buyer Agent</div>
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Add Buyer Agent's SVID</span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb"></span> Yes</span>
+            <span class="ro"><span class="rb on"></span> No</span>
+          </div>
+          <div class="fn">Always select: <strong>No</strong></div>
+        </div>
       </div>
     </div>
 
-  </div>
-</div>
 
-
-<!-- ════════════════════════════════════════════
-     10 · TRADE IN
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">10 &nbsp;&middot;&nbsp; Trade In</span></div>
-  <div class="sec-body">
-    <div class="frow">
-      <div class="f w3">
-        <div class="lbl">Sale Includes Trade-In Vehicle <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>No</strong> or <strong>One</strong> &mdash; based on DR0024<span class="gs">Source: DR0024</span></span></div>
+    <!-- ══════════════════════════════════════════
+         SALE INFO
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Sale Info</div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Date of Sale <span class="r">*</span></span>
+          <div class="fi dt" onclick="tog(this,event)"><span class="cal">&#128197;</span></div>
+          <div class="fn">Enter the date the vehicle was sold.<span class="src">Source: Carma / RPA</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Gross Sales Price <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"><span class="pfx">$</span></div>
+          <div class="fn">Must match the gross sales price on the <strong>DR0024</strong> sales tax receipt.<span class="src">Source: DR0024</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Net Sales Price <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"><span class="pfx">$</span></div>
+          <div class="fn">Auto-updates based on gross price and trade-in. Do not edit manually.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">MSRP <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"><span class="pfx">$</span></div>
+          <div class="fn"><span class="warn">&#9888; Come back to this AFTER clicking Get Fees. Do not fill in before running Get Fees.</span>Enter the MSRP value that appears after Get Fees is clicked.</div>
+        </div>
+      </div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Tax Amount Home Rule <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"><span class="pfx">$</span></div>
+          <div class="fn">Must match <strong>Part 3 of the DR0024</strong> sales tax receipt exactly.<span class="src">Source: DR0024 Part 3</span></div>
+        </div>
       </div>
     </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Gross Trade In Amount</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Populates based on DR0024</span></div>
+
+
+    <!-- ══════════════════════════════════════════
+         TRADE IN
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Trade In</div>
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Sale includes Trade In Vehicle</span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb"></span> One</span>
+            <span class="ro"><span class="rb"></span> Two</span>
+            <span class="ro"><span class="rb on"></span> No</span>
+          </div>
+          <div class="fn">Select <strong>No</strong> or <strong>One</strong> based on what is listed on the DR0024. Select Two only if two trade-ins appear on the DR0024.<span class="src">Source: DR0024</span></div>
+        </div>
       </div>
-      <div class="f w2">
-        <div class="lbl">Trade In 1 Amount</div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match DR0024<span class="gs">Source: DR0024</span></span></div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Gross Trade In Amount</span>
+          <div class="fi" onclick="tog(this,event)"><span class="pfx">$</span></div>
+          <div class="fn">Populates automatically based on the trade-in selection and DR0024 amounts.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Trade In 1 Amount</span>
+          <div class="fi" onclick="tog(this,event)"><span class="pfx">$</span></div>
+          <div class="fn">Must match the trade-in amount listed on the DR0024.<span class="src">Source: DR0024</span></div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 
-<!-- ════════════════════════════════════════════
-     11 · TITLE & REGISTRATION INFO
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr">
-    <span class="sec-title">11 &nbsp;&middot;&nbsp; Title &amp; Registration Info</span>
-    <span class="risk hi">&#9888; High Risk</span>
-  </div>
-  <div class="sec-body">
-    <div class="frow">
-      <div class="f w3">
-        <div class="lbl">Ownership Document <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Out of State Title</strong></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Title Number <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Document number from the most recently issued title<span class="gs">Source: Out-of-state title</span></span></div>
+    <!-- ══════════════════════════════════════════
+         TITLE AND REGISTRATION INFO
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Title and Registration Info</div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Ownership Document <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Always select: <strong>Out of State Title</strong></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Title Number <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the document number from the most recently issued out-of-state title.<span class="src">Source: Out-of-state title</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Title State <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Select the state that issued the title. Must be <strong>Arizona</strong>, <strong>Arkansas</strong>, or <strong>Montana</strong>.<span class="src">Source: Out-of-state title</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Title Issue Date <span class="r">*</span></span>
+          <div class="fi dt" onclick="tog(this,event)"><span class="cal">&#128197;</span></div>
+          <div class="fn">Enter the issue date exactly as it appears on the title.<span class="src">Source: Out-of-state title</span></div>
+        </div>
       </div>
     </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Title State <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>Arizona</strong>, <strong>Arkansas</strong>, or <strong>Montana</strong><span class="gs">Source: Out-of-state title</span></span></div>
+
+
+    <!-- ══════════════════════════════════════════
+         LIENHOLDER INFO
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Lienholder Info</div>
+      <p class="sec-note">Financed deals only. Must be applied within 30 days of the sale date.</p>
+
+      <div class="sub" style="margin-top:0">Primary Lienholder</div>
+
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Lien Stamp Received by County? <span class="r">*</span></span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb"></span> Yes</span>
+            <span class="ro"><span class="rb on"></span> No</span>
+          </div>
+          <div class="fn">Always select: <strong>No</strong></div>
+        </div>
       </div>
-      <div class="f w2">
-        <div class="lbl">Title Issue Date <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match the title exactly<span class="gs">Source: Out-of-state title</span></span></div>
+
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Received Date <span class="r">*</span></span>
+          <div class="fi dt" onclick="tog(this,event)"><span class="cal">&#128197;</span></div>
+          <div class="fn">Auto-populates after the lien stamp is applied. Do not enter manually.</div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Electronic Lien? <span class="r">*</span></span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb on"></span> Yes</span>
+            <span class="ro"><span class="rb"></span> No</span>
+          </div>
+          <div class="fn">Always select: <strong>Yes</strong></div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">ELT # <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Auto-populates from the lender name selected in the Electronic Lien Name field.</div>
+        </div>
+        <div class="f w3">
+          <span class="fl">Electronic Lien Name <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the lender name and select from the dropdown list that appears. ELT #, name, and address will all auto-populate from your selection.</div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f w1">
+          <span class="fl">Zip Code <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Auto-populates from the lender selected. Do not edit.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">City <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Auto-populates from the lender selected. Do not edit.</div>
+        </div>
+        <div class="f w1">
+          <span class="fl">State <span class="r">*</span></span>
+          <div class="fi sel" onclick="tog(this,event)"><span class="arr">&#9660;</span></div>
+          <div class="fn">Auto-populates from the lender selected. Do not edit.</div>
+        </div>
+        <div class="f w3">
+          <span class="fl">Address Line 1 <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Auto-populates from the lender selected. Do not edit.</div>
+        </div>
+        <div class="f w3">
+          <span class="fl">Address Line 2</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Auto-populates from the lender selected. Do not edit.</div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Lien Recorded Date <span class="r">*</span></span>
+          <div class="fi dt" onclick="tog(this,event)"><span class="cal">&#128197;</span></div>
+          <div class="fn">Enter the date from the Security Agreement.<span class="src">Source: Security Agreement</span></div>
+        </div>
+        <div class="f w2">
+          <span class="fl">Amount <span class="r">*</span></span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Enter the <strong>Total Amount of Payments</strong> from the finance contract. If that line is not listed, use the <strong>Amount Financed</strong> instead.<span class="src">Source: Security Agreement / Finance contract</span></div>
+        </div>
+      </div>
+
+      <div class="fr">
+        <div class="f wfl">
+          <span class="fl">Lien Previously Filed <span class="r">*</span></span>
+          <div class="fir" onclick="tog(this,event)">
+            <span class="ro"><span class="rb"></span> Yes</span>
+            <span class="ro"><span class="rb on"></span> No</span>
+          </div>
+          <div class="fn">Always select: <strong>No</strong></div>
+        </div>
+      </div>
+
+      <div class="add-lnk">&#8853; Add Secondary Lienholder</div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         TAX ACCOUNT INFO
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Tax Account Info <span class="iico">i</span></div>
+      <div class="fr">
+        <div class="f w2">
+          <span class="fl">Colorado Sales Tax Account Number</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Always leave <strong>blank</strong>.</div>
+        </div>
+        <div class="f w2">
+          <span class="fl">City Sales Tax Account Number</span>
+          <div class="fi" onclick="tog(this,event)"></div>
+          <div class="fn">Always leave <strong>blank</strong>.</div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 
-<!-- ════════════════════════════════════════════
-     12 · LIENHOLDER INFO
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr">
-    <span class="sec-title">12 &nbsp;&middot;&nbsp; Lienholder Info</span>
-    <span class="risk fin">Financed Deals</span>
-  </div>
-  <div class="sec-body">
-    <div class="note warn">&#128203; Must be applied within <strong>30 days</strong> of sale date</div>
-    <div class="frow">
-      <div class="f w3">
-        <div class="lbl">Lien Stamp Received by County? <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>No</strong></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Received Date</div>
-        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Auto-populates after lien stamp is applied</span></div>
+    <!-- ══════════════════════════════════════════
+         DMV FEES
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">DMV Fees <span class="green-btn">Get Fees</span></div>
+      <div class="callout">
+        Click <strong>Get Fees</strong> to load the fee values. Verify all amounts match the <strong>DR0024</strong> exactly.
+        <br><br>
+        <strong>Sales Tax</strong> must always show as <em>Paid</em>.
+        &nbsp;&nbsp;&#124;&nbsp;&nbsp;
+        <strong>Use Tax</strong> will never show as Paid.
+        <br><br>
+        <span style="color:#b71c1c;font-weight:600">&#9888; After Get Fees loads — go back to Sale Info and enter the MSRP value that now appears there before continuing.</span>
       </div>
     </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Electronic Lien? <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Yes</strong></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">ELT #</div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto-populates from lender name entered</span></div>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="f w3">
-        <div class="lbl">Electronic Lien Name</div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto-populates from lender name</span></div>
-      </div>
-      <div class="f w3">
-        <div class="lbl">Address Line</div>
-        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto-populates from lender name</span></div>
+
+
+    <!-- ══════════════════════════════════════════
+         FINAL STEPS
+    ══════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-hdr">Final Steps</div>
+      <div class="final-list">
+        <label class="fstep"><input type="checkbox"> Mark as Sold</label>
+        <label class="fstep"><input type="checkbox"> Upload Lien Stamp Documents</label>
+        <label class="fstep"><input type="checkbox"> Apply Lien Stamp <span class="fstep-sub">(financed deals only)</span></label>
+        <label class="fstep"><input type="checkbox"> Upload Registration Packet Documents</label>
+        <label class="fstep"><input type="checkbox"> Review</label>
+        <label class="fstep"><input type="checkbox"> Finalize</label>
       </div>
     </div>
-    <div class="frow">
-      <div class="f w2">
-        <div class="lbl">Lien Recorded Date <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Date from the Security Agreement<span class="gs">Source: Security Agreement</span></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Amount <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Total Amount of Payments</strong>. If not listed &mdash; use Amount Financed instead.<span class="gs">Source: Security Agreement / Finance contract</span></span></div>
-      </div>
-      <div class="f w2">
-        <div class="lbl">Lien Previously Filed <span class="r">*</span></div>
-        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>No</strong></span></div>
-      </div>
-    </div>
-  </div>
-</div>
 
-
-<!-- ════════════════════════════════════════════
-     13 · TAX ACCOUNT INFO
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">13 &nbsp;&middot;&nbsp; Tax Account Info</span></div>
-  <div class="sec-body">
-    <div class="g blank" style="width:100%"><span class="chip blank">BLANK</span><span class="gt">All fields in this section are always left blank</span></div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     14 · DMV FEES — GET FEES
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr">
-    <span class="sec-title">14 &nbsp;&middot;&nbsp; DMV Fees &mdash; Get Fees</span>
-    <span class="risk hi">&#9888; High Risk</span>
-  </div>
-  <div class="sec-body">
-    <div class="note info">&#128203; All fee values must match <strong>DR0024</strong> exactly</div>
-    <table class="ftbl">
-      <thead>
-        <tr><th>Fee Type</th><th>What to Expect</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Sales Tax</td>
-          <td>Must always show as <span class="pill paid">Paid</span></td>
-        </tr>
-        <tr>
-          <td>Use Tax</td>
-          <td>Will <span class="pill never">never</span> show as &ldquo;Paid&rdquo;</td>
-        </tr>
-        <tr>
-          <td>All Other Fees</td>
-          <td>Must match DR0024 exactly</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="g action" style="margin-top:10px; width:100%">
-      <span class="chip action">&#9888; NEXT STEP</span>
-      <span class="gt">After clicking Get Fees &mdash; go back to <strong>Sale Info &rarr; MSRP</strong> and enter the MSRP value found here before proceeding</span>
-    </div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════════════
-     FINAL STEPS
-════════════════════════════════════════════ -->
-<div class="section">
-  <div class="sec-hdr"><span class="sec-title">Final Steps</span></div>
-  <div class="sec-body">
-    <div class="steps">
-      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Mark as Sold</div></div></label>
-      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Upload Lien Stamp Documents</div></div></label>
-      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Apply Lien Stamp</div><div class="st-note">Financed deals only</div></div></label>
-      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Upload Registration Packet Documents</div></div></label>
-      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Review</div></div></label>
-      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Finalize</div></div></label>
-    </div>
-  </div>
-</div>
-
-<div class="spacer"></div>
+  </div><!-- /content -->
+</div><!-- /page -->
 
 <script>
-  document.querySelectorAll('.steps .step').forEach(function(lbl, i) {
-    var cb  = lbl.querySelector('input');
-    var key = 'vitu_step_' + i;
+  function tog(el, e) {
+    if (e) e.stopPropagation();
+    var p = el.parentElement;
+    var fn = p ? p.querySelector('.fn') : null;
+    if (!fn) return;
+    var wasOpen = fn.classList.contains('show');
+    closeAll();
+    if (!wasOpen) {
+      fn.classList.add('show');
+      el.classList.add('open');
+    }
+  }
+
+  function closeAll() {
+    document.querySelectorAll('.fn.show').forEach(function(n) { n.classList.remove('show'); });
+    document.querySelectorAll('.fi.open,.fir.open,.fic.open').forEach(function(el) { el.classList.remove('open'); });
+  }
+
+  document.addEventListener('click', closeAll);
+
+  /* Final steps — localStorage persistence */
+  document.querySelectorAll('.final-list .fstep').forEach(function(lbl, i) {
+    var cb = lbl.querySelector('input');
+    var key = 'vitu_fs_' + i;
     if (localStorage.getItem(key) === '1') { cb.checked = true; lbl.classList.add('done'); }
-    cb.addEventListener('change', function() {
+    cb.addEventListener('change', function(e) {
+      e.stopPropagation();
       lbl.classList.toggle('done', cb.checked);
       localStorage.setItem(key, cb.checked ? '1' : '0');
     });
