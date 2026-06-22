@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CO VITU — In-State Registration Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:      #1565c0;
+      --blue-dark: #0d2a6e;
+      --req:       #e53935;
+      --bg:        #edf0f5;
+      --border:    #cdd3dc;
+      --text:      #1e293b;
+      --muted:     #64748b;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    /* ─── sticky header ─── */
+    .page-header {
+      background: var(--blue-dark);
+      color: #fff;
+      padding: 10px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .page-header h1  { font-size: 14px; font-weight: 700; }
+    .page-header sub { font-size: 11px; opacity: .72; font-weight: 400; }
+
+    /* ─── legend ─── */
+    .legend {
+      background: #fff;
+      border-bottom: 2px solid var(--border);
+      padding: 5px 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      position: sticky;
+      top: 40px;
+      z-index: 199;
+    }
+    .leg-lbl  { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .3px; margin-right: 2px; }
+    .leg-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
+
+    /* ─── chips ─── */
+    .chip {
+      display: inline-flex; align-items: center;
+      font-size: 9px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+      padding: 1px 5px; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+    }
+    .chip.auto   { background: #dcfce7; color: #15803d; }
+    .chip.verify { background: #dbeafe; color: #1e40af; }
+    .chip.manual { background: #fef3c7; color: #92400e; }
+    .chip.blank  { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .chip.cond   { background: #ede9fe; color: #6d28d9; }
+    .chip.action { background: #fee2e2; color: #991b1b; }
+
+    /* ─── sections ─── */
+    .section {
+      margin: 10px;
+      background: #fff;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,.07);
+    }
+    .sec-hdr {
+      background: var(--blue-dark);
+      color: #fff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .sec-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; }
+    .risk { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+    .risk.hi  { background: #fecaca; color: #7f1d1d; }
+    .risk.med { background: #fde68a; color: #78350f; }
+    .risk.fin { background: #bfdbfe; color: #1e3a8a; }
+
+    .sec-body { padding: 12px 14px; }
+
+    /* ─── callouts ─── */
+    .note {
+      border-radius: 4px; padding: 6px 10px; margin-bottom: 10px;
+      font-size: 11px; border-left: 3px solid;
+    }
+    .note.info { background: #eff6ff; border-color: #3b82f6; color: #1e40af; }
+    .note.warn { background: #fff7ed; border-color: #f97316; color: #9a3412; }
+
+    /* ─── VIN decode button replica ─── */
+    .vin-bar {
+      background: #e8f4fd; border: 1px solid #90caf9;
+      border-radius: 4px; padding: 7px 10px; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .vin-btn  { background: #2e7d32; color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 4px; cursor: default; }
+    .vin-note { font-size: 11px; color: #1565c0; }
+
+    /* ─── summary bar replica ─── */
+    .sumbar {
+      background: #cce5ff; border: 1px solid #90caf9;
+      border-radius: 4px; padding: 6px 10px; margin: 4px 0 12px;
+      display: flex; gap: 20px; flex-wrap: wrap;
+    }
+    .sb-item { display: flex; flex-direction: column; }
+    .sb-lbl  { font-size: 9px; font-weight: 700; color: #004085; text-transform: uppercase; letter-spacing: .4px; }
+    .sb-val  { font-size: 11px; color: #004085; }
+
+    /* ─── field grid ─── */
+    .frow { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+    .frow:last-child { margin-bottom: 0; }
+    .f { display: flex; flex-direction: column; gap: 3px; min-width: 90px; }
+    .f.w1   { flex: 1; }
+    .f.w2   { flex: 2; }
+    .f.w3   { flex: 3; }
+    .f.w4   { flex: 4; }
+    .f.wful { flex: 1 1 100%; }
+
+    /* ─── VITU-style label ─── */
+    .lbl { font-size: 11px; font-weight: 600; color: var(--blue); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .lbl .r { color: var(--req); margin-left: 1px; }
+
+    /* ─── guidance box (mimics VITU input — shows instructions instead) ─── */
+    .g {
+      border-radius: 3px; padding: 4px 7px; min-height: 30px;
+      display: flex; gap: 5px; align-items: flex-start;
+      border: 1.5px solid;
+    }
+    .g.auto   { background: #f0fdf4; border-color: #86efac; }
+    .g.verify { background: #eff6ff; border-color: #93c5fd; }
+    .g.manual { background: #fffbeb; border-color: #fcd34d; }
+    .g.blank  { background: #f8fafc; border-color: #cbd5e1; }
+    .g.cond   { background: #faf5ff; border-color: #c4b5fd; }
+    .g.action { background: #fff1f2; border-color: #fca5a5; }
+
+    .gt { flex: 1; font-size: 11.5px; line-height: 1.35; padding-top: 1px; }
+    .gt strong { font-weight: 700; }
+    .gs { font-size: 10px; color: var(--muted); font-style: italic; margin-top: 2px; display: block; }
+
+    /* ─── body style code chips ─── */
+    .codes { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+    .cc { background: #dbeafe; border: 1px solid #bfdbfe; border-radius: 3px; padding: 1px 5px; font-size: 9.5px; color: #1e40af; }
+    .cc strong { font-weight: 700; }
+
+    /* ─── sub-section label ─── */
+    .sub { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin: 10px 0 6px; padding-bottom: 4px; border-bottom: 1px solid #e2e8f0; }
+    .sub:first-child { margin-top: 0; }
+
+    /* ─── fee table ─── */
+    .ftbl { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+    .ftbl th { background: #1a237e; color: #fff; padding: 6px 10px; text-align: left; font-weight: 600; font-size: 11px; }
+    .ftbl td { padding: 5px 10px; border-bottom: 1px solid #e2e8f0; }
+    .ftbl tr:last-child td { border-bottom: none; }
+    .pill { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 10px; }
+    .paid  { background: #dcfce7; color: #15803d; }
+    .never { background: #fef3c7; color: #92400e; }
+
+    /* ─── final steps ─── */
+    .steps { display: flex; flex-direction: column; gap: 6px; }
+    label.step {
+      display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px;
+      border-radius: 4px; border: 1.5px solid #e2e8f0;
+      cursor: pointer; user-select: none; transition: background .12s, border-color .12s;
+    }
+    label.step:hover { background: #f8fafc; }
+    label.step.done  { background: #f0fdf4; border-color: #86efac; }
+    label.step input { width: 15px; height: 15px; margin-top: 1px; cursor: pointer; accent-color: #16a34a; flex-shrink: 0; }
+    .st-body  { flex: 1; }
+    .st-title { font-size: 13px; font-weight: 600; color: var(--text); }
+    .st-note  { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    .spacer { height: 48px; }
+
+    @media (max-width: 500px) {
+      .f { flex: 1 1 100% !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>CO VITU &mdash; In-State Registration Guide</h1>
+  <sub>Colorado In-State Title &amp; Registration &nbsp;&middot;&nbsp; Use alongside the VITU portal</sub>
+</header>
+
+<div class="legend">
+  <span class="leg-lbl">Key:</span>
+  <span class="leg-item"><span class="chip auto">AUTO</span> Auto-populates, verify</span>
+  <span class="leg-item"><span class="chip verify">VERIFY</span> Auto &mdash; must double-check</span>
+  <span class="leg-item"><span class="chip manual">MANUAL</span> Enter manually</span>
+  <span class="leg-item"><span class="chip blank">BLANK</span> Leave blank</span>
+  <span class="leg-item"><span class="chip cond">COND.</span> Conditional &mdash; see note</span>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     1 · TRANSACTION INFORMATION
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">1 &nbsp;&middot;&nbsp; Transaction Information</span></div>
+  <div class="sec-body">
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Location <span class="r">*</span></div>
+        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Defaulted &mdash; confirm it is the correct location</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Titling State <span class="r">*</span></div>
+        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Must be <strong>CO</strong></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Acquisition Type <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>Colorado Dealer</strong></span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Transaction <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>Title Only</strong></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Transaction Type <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>New Ownership</strong></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Is Vehicle Delivered? <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Check Carma &mdash; mark <strong>Yes</strong> or <strong>No</strong><span class="gs">Source: Carma</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     2 · VEHICLE INFORMATION
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-title">2 &nbsp;&middot;&nbsp; Vehicle Information</span>
+    <span class="risk hi">&#9888; High Risk</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="vin-bar">
+      <span class="vin-btn">Populate from VIN Decode</span>
+      <span class="vin-note">Enter VIN first &mdash; then click to auto-populate fields below</span>
+    </div>
+
+    <div class="frow">
+      <div class="f w3">
+        <div class="lbl">VIN <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Enter VIN from title or bill of sale</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Stock Number</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Enter stock number<span class="gs">Source: Carma</span></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Vehicle Sold As <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Used</strong></span></div>
+      </div>
+    </div>
+
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Special Purchase Type</div>
+        <div class="g blank"><span class="chip blank">BLANK</span><span class="gt">Always leave blank</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Vehicle Type <span class="r">*</span></div>
+        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto-populates &mdash; confirm it is correct</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Vehicle Class <span class="r">*</span></div>
+        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto-populates &mdash; confirm it is correct</span></div>
+      </div>
+    </div>
+
+    <div class="frow">
+      <div class="f w1">
+        <div class="lbl">Year <span class="r">*</span></div>
+        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto &mdash; confirm correct</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Make <span class="r">*</span></div>
+        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto &mdash; full make name (e.g. MAZDA)</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Model <span class="r">*</span></div>
+        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto &mdash; shortened model name</span></div>
+      </div>
+    </div>
+
+    <div class="frow">
+      <div class="f wful">
+        <div class="lbl">Style <span class="r">*</span></div>
+        <div class="g verify">
+          <span class="chip verify">VERIFY</span>
+          <span class="gt">Auto-populates &mdash; double-check body style code is correct
+            <div class="codes">
+              <span class="cc"><strong>CP</strong> Coupe</span>
+              <span class="cc"><strong>CV</strong> Convertible</span>
+              <span class="cc"><strong>SD</strong> Sedan</span>
+              <span class="cc"><strong>UP</strong> SUV</span>
+              <span class="cc"><strong>PV</strong> Passenger Van</span>
+              <span class="cc"><strong>SW</strong> Station Wagon</span>
+              <span class="cc"><strong>PK</strong> Pickup</span>
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sumbar">
+      <div class="sb-item"><span class="sb-lbl">Make / Model / Year</span><span class="sb-val">Auto-populated after VIN decode</span></div>
+      <div class="sb-item"><span class="sb-lbl">Style</span><span class="sb-val">Auto-populated</span></div>
+      <div class="sb-item"><span class="sb-lbl">Fuel Type</span><span class="sb-val">Auto-populated</span></div>
+      <div class="sb-item"><span class="sb-lbl">Unladen / Gross Weight</span><span class="sb-val">Auto-populated</span></div>
+    </div>
+
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Color <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match across all paperwork</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Unladen Weight</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">From MT or AR title. <strong>If AZ title &mdash; leave as is.</strong><span class="gs">Source: Out-of-state title</span></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Fuel Type <span class="r">*</span></div>
+        <div class="g verify"><span class="chip verify">VERIFY</span><span class="gt">Auto &mdash; if wrong, check Carma vehicle details<span class="gs">Source: Carma (if correction needed)</span></span></div>
+      </div>
+    </div>
+
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Override Fuel Type</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Only check if fuel type populated incorrectly</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Plug In <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>No</strong> &mdash; unless electric or specific plug-in hybrid</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Override Plug In</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Always <strong>No</strong> &mdash; unless an error appears when Get Fees is clicked</span></div>
+      </div>
+    </div>
+
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Non-Fleet Unit Number</div>
+        <div class="g blank"><span class="chip blank">BLANK</span><span class="gt">Always leave blank</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Odometer Validity <span class="r">*</span></div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Defaults to <strong>Actual Mileage</strong></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Odometer Reading <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match bill of sale<span class="gs">Source: Bill of Sale</span></span></div>
+      </div>
+    </div>
+
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Odometer Unit <span class="r">*</span></div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Defaults to <strong>Actual Miles</strong></span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     3 · OWNER INFO
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">3 &nbsp;&middot;&nbsp; Owner Info</span></div>
+  <div class="sec-body">
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Primary Owner <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Individual</strong></span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Last Name <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL<span class="gs">Source: Driver's License</span></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">First Name <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL<span class="gs">Source: Driver's License</span></span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">Middle Name</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">Suffix</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL (Jr., Sr., etc.)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     4 · PROOF OF IDENTIFICATION
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">4 &nbsp;&middot;&nbsp; Proof of Identification</span></div>
+  <div class="sec-body">
+    <div class="frow">
+      <div class="f w3">
+        <div class="lbl">Proof of Identification <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Select whichever document type applies</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Document Number <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">The ID or document number<span class="gs">Source: DL / ID card</span></span></div>
+      </div>
+    </div>
+    <div class="note info">&#9888;&#65039; Fields below only appear when <strong>Out-of-State Driver's License</strong> is selected as proof of ID.</div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Document First Name</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; as shown on document</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Document Last Name</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; as shown on document</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Document Middle Name</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; as shown on document</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Expiry Date</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; expiry date from document</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Date of Birth</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only &mdash; DOB from document</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     5 · RESIDENCE ADDRESS
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">5 &nbsp;&middot;&nbsp; Residence Address</span></div>
+  <div class="sec-body">
+    <div class="note info">&#128203; Use the <strong>registration address</strong> from Carma</div>
+    <div class="frow">
+      <div class="f w1">
+        <div class="lbl">Street Number <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Number only (e.g. 123)<span class="gs">Source: Carma</span></span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">House Suffix</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">1/2, 1/4, .5 &mdash; if applicable</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">Direction Prefix</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">N, E, S, W &mdash; if applicable</span></div>
+      </div>
+      <div class="f w3">
+        <div class="lbl">Street Name <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Name only &mdash; no number or type</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Street Type <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Dr, St, Ave, Blvd, Rd, Ln, etc.</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">Direction Postfix</div>
+        <div class="g blank"><span class="chip blank">BLANK</span><span class="gt">Leave blank</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">APT/Unit Type</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Apt, Unit, Suite &mdash; if applicable</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">APT/Unit Number</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Unit # &mdash; if applicable</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w1">
+        <div class="lbl">Zip Code <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">5-digit ZIP</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">City <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">City name</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">County</div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto-populates from ZIP / City</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">State</div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto: <strong>CO</strong></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     6 · MAILING ADDRESS
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">6 &nbsp;&middot;&nbsp; Mailing Address</span></div>
+  <div class="sec-body">
+    <div class="note info">&#128203; Only required when <strong>different from residence address</strong> or when using VITU's suggested address. Should also be on the title application (page 1).</div>
+    <div class="frow">
+      <div class="f wful">
+        <div class="lbl">Add Mailing Address</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Check this box only if mailing address differs from residence</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w1">
+        <div class="lbl">Zip Code</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">5-digit ZIP</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">City</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">City name</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">State</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">State abbrev.</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">Country</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Default: US</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w4">
+        <div class="lbl">Address Line 1</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Street number, name, and type (e.g. 123 Main St)</span></div>
+      </div>
+      <div class="f w4">
+        <div class="lbl">Address Line 2</div>
+        <div class="g blank"><span class="chip blank">BLANK</span><span class="gt">Never use this field</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w1">
+        <div class="lbl">APT/Unit Type</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">If applicable</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">APT/Unit Number</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">If applicable</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     7 · SECONDARY OWNER
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">7 &nbsp;&middot;&nbsp; Secondary Owner</span></div>
+  <div class="sec-body">
+    <div class="note info">&#128203; Only applies to co-buyer / 3rd-party finance deals</div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Owner Type <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Individual</strong></span></div>
+      </div>
+      <div class="f w3">
+        <div class="lbl">Do You Want a Joint Tenancy?</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Fill in based on what was checked on the <strong>Joint Tenancy Form</strong><span class="gs">Source: Joint Tenancy Form</span></span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Last Name <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">First Name <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As it appears on DL</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">Middle Name</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As on DL</span></div>
+      </div>
+      <div class="f w1">
+        <div class="lbl">Suffix</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">As on DL</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     8 · SECONDARY OWNER — PROOF OF ID
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">8 &nbsp;&middot;&nbsp; Secondary Owner &mdash; Proof of ID</span></div>
+  <div class="sec-body">
+    <div class="frow">
+      <div class="f w3">
+        <div class="lbl">Proof of Identification <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Select whichever document type applies</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Document Number <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">The ID or document number</span></div>
+      </div>
+    </div>
+    <div class="note info">&#9888;&#65039; Fields below only appear when <strong>Out-of-State Driver's License</strong> is selected.</div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Document First Name</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Document Last Name</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Document Middle Name</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Expiry Date</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Date of Birth</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">OOS DL only</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     9 · BUYERS AGENT & SALE INFO
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-title">9 &nbsp;&middot;&nbsp; Buyers Agent &amp; Sale Info</span>
+    <span class="risk hi">&#9888; High Risk</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="sub">Buyers Agent</div>
+    <div class="frow">
+      <div class="f w3">
+        <div class="lbl">Add Buyer's Agent SVID</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>No</strong></span></div>
+      </div>
+    </div>
+
+    <div class="sub">Sale Info</div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Sale Type <span class="r">*</span></div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Defaults to <strong>Purchase</strong></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Date of Sale <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Date of sale<span class="gs">Source: Carma / RPA</span></span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Gross Sales Price <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match <strong>DR0024</strong><span class="gs">Source: DR0024</span></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Net Sales Price</div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Updates automatically</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">MSRP</div>
+        <div class="g action"><span class="chip action">&#9888; ACTION</span><span class="gt"><strong>Come back AFTER clicking Get Fees.</strong> Enter the MSRP value found there &mdash; do not fill in before.</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Tax Amount Home Rule <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match <strong>Part 3 of DR0024</strong> exactly<span class="gs">Source: DR0024 Part 3</span></span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     10 · TRADE IN
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">10 &nbsp;&middot;&nbsp; Trade In</span></div>
+  <div class="sec-body">
+    <div class="frow">
+      <div class="f w3">
+        <div class="lbl">Sale Includes Trade-In Vehicle <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>No</strong> or <strong>One</strong> &mdash; based on DR0024<span class="gs">Source: DR0024</span></span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Gross Trade In Amount</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Populates based on DR0024</span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Trade In 1 Amount</div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match DR0024<span class="gs">Source: DR0024</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     11 · TITLE & REGISTRATION INFO
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-title">11 &nbsp;&middot;&nbsp; Title &amp; Registration Info</span>
+    <span class="risk hi">&#9888; High Risk</span>
+  </div>
+  <div class="sec-body">
+    <div class="frow">
+      <div class="f w3">
+        <div class="lbl">Ownership Document <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Out of State Title</strong></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Title Number <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Document number from the most recently issued title<span class="gs">Source: Out-of-state title</span></span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Title State <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt"><strong>Arizona</strong>, <strong>Arkansas</strong>, or <strong>Montana</strong><span class="gs">Source: Out-of-state title</span></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Title Issue Date <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Must match the title exactly<span class="gs">Source: Out-of-state title</span></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     12 · LIENHOLDER INFO
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-title">12 &nbsp;&middot;&nbsp; Lienholder Info</span>
+    <span class="risk fin">Financed Deals</span>
+  </div>
+  <div class="sec-body">
+    <div class="note warn">&#128203; Must be applied within <strong>30 days</strong> of sale date</div>
+    <div class="frow">
+      <div class="f w3">
+        <div class="lbl">Lien Stamp Received by County? <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>No</strong></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Received Date</div>
+        <div class="g cond"><span class="chip cond">COND.</span><span class="gt">Auto-populates after lien stamp is applied</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Electronic Lien? <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Yes</strong></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">ELT #</div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto-populates from lender name entered</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w3">
+        <div class="lbl">Electronic Lien Name</div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto-populates from lender name</span></div>
+      </div>
+      <div class="f w3">
+        <div class="lbl">Address Line</div>
+        <div class="g auto"><span class="chip auto">AUTO</span><span class="gt">Auto-populates from lender name</span></div>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="f w2">
+        <div class="lbl">Lien Recorded Date <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Date from the Security Agreement<span class="gs">Source: Security Agreement</span></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Amount <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>Total Amount of Payments</strong>. If not listed &mdash; use Amount Financed instead.<span class="gs">Source: Security Agreement / Finance contract</span></span></div>
+      </div>
+      <div class="f w2">
+        <div class="lbl">Lien Previously Filed <span class="r">*</span></div>
+        <div class="g manual"><span class="chip manual">MANUAL</span><span class="gt">Always <strong>No</strong></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     13 · TAX ACCOUNT INFO
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">13 &nbsp;&middot;&nbsp; Tax Account Info</span></div>
+  <div class="sec-body">
+    <div class="g blank" style="width:100%"><span class="chip blank">BLANK</span><span class="gt">All fields in this section are always left blank</span></div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     14 · DMV FEES — GET FEES
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-title">14 &nbsp;&middot;&nbsp; DMV Fees &mdash; Get Fees</span>
+    <span class="risk hi">&#9888; High Risk</span>
+  </div>
+  <div class="sec-body">
+    <div class="note info">&#128203; All fee values must match <strong>DR0024</strong> exactly</div>
+    <table class="ftbl">
+      <thead>
+        <tr><th>Fee Type</th><th>What to Expect</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sales Tax</td>
+          <td>Must always show as <span class="pill paid">Paid</span></td>
+        </tr>
+        <tr>
+          <td>Use Tax</td>
+          <td>Will <span class="pill never">never</span> show as &ldquo;Paid&rdquo;</td>
+        </tr>
+        <tr>
+          <td>All Other Fees</td>
+          <td>Must match DR0024 exactly</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="g action" style="margin-top:10px; width:100%">
+      <span class="chip action">&#9888; NEXT STEP</span>
+      <span class="gt">After clicking Get Fees &mdash; go back to <strong>Sale Info &rarr; MSRP</strong> and enter the MSRP value found here before proceeding</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     FINAL STEPS
+════════════════════════════════════════════ -->
+<div class="section">
+  <div class="sec-hdr"><span class="sec-title">Final Steps</span></div>
+  <div class="sec-body">
+    <div class="steps">
+      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Mark as Sold</div></div></label>
+      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Upload Lien Stamp Documents</div></div></label>
+      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Apply Lien Stamp</div><div class="st-note">Financed deals only</div></div></label>
+      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Upload Registration Packet Documents</div></div></label>
+      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Review</div></div></label>
+      <label class="step"><input type="checkbox"><div class="st-body"><div class="st-title">Finalize</div></div></label>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<script>
+  document.querySelectorAll('.steps .step').forEach(function(lbl, i) {
+    var cb  = lbl.querySelector('input');
+    var key = 'vitu_step_' + i;
+    if (localStorage.getItem(key) === '1') { cb.checked = true; lbl.classList.add('done'); }
+    cb.addEventListener('change', function() {
+      lbl.classList.toggle('done', cb.checked);
+      localStorage.setItem(key, cb.checked ? '1' : '0');
+    });
+  });
+</script>
+</body>
+</html>
